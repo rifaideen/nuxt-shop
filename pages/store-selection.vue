@@ -94,7 +94,9 @@ export default {
     },
   },
   async asyncData({ store }) {
-    await store.dispatch('getCountries');
+    if (store.state.countries.length === 0) {
+      await store.dispatch('getCountries');
+    }
 
     return {};
   },
