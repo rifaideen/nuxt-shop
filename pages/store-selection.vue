@@ -76,16 +76,17 @@ import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
   data() {
+    const { country, city } = this.$store.state;
     return {
-      country: '',
-      city: '',
+      country: country || '',
+      city: city || '',
     };
   },
   computed: {
     ...mapState(['countries', 'cities', 'stores']),
   },
   methods: {
-    ...mapMutations(['setCities', 'setStores', 'setStore']),
+    ...mapMutations(['setCities', 'setStores', 'setStore', 'setCountry', 'setCity']),
     ...mapActions(['getCities', 'getStores']),
     selectStore(store) {
       this.setStore(store);
@@ -106,6 +107,7 @@ export default {
       }
 
       this.city = '';
+      this.setCountry(value);
     },
     city(value) {
       if (value !== '') {
@@ -114,6 +116,7 @@ export default {
         this.setStores([]);
       }
 
+      this.setCity(value);
       this.setStore(null);
     },
   },
@@ -129,6 +132,5 @@ export default {
 }
 .store img {
   height: 300px;
-  /* width: 200px; */
 }
 </style>
