@@ -32,7 +32,7 @@ export default {
   ],
 
   router: {
-    middleware: ['store-selection'],
+    middleware: [],
   },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -46,5 +46,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  publicRuntimeConfig: {
+    exludeStoreSelection: ['about'],
   },
 };
