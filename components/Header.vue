@@ -6,7 +6,7 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item to="/">Home</b-nav-item>
-          <b-nav-item to="/store-selection">Store Selection</b-nav-item>
+          <b-nav-item to="/store-selection">Stores</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
