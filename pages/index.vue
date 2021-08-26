@@ -9,10 +9,11 @@
 
     <!-- Best Sellers -->
     <div class="container mt-2">
-      <GridProductRow
+      <GridItemsRow
         title="Our Best Sellers"
-        :products="bestSellers"
+        :items="bestSellers"
         see-all-link="/best-sellers"
+        base-url="product"
       />
     </div>
 
@@ -33,11 +34,12 @@
 
     <!-- Explore our packed collections -->
     <div class="container">
-      <GridProductRow
+      <GridItemsRow
         title="Explore Our Packed Collections"
-        :products="readyBoxes"
+        :items="readyBoxes"
         see-all-link="/ready-boxes"
         id-attribute="collection_id"
+        base-url="product"
       />
     </div>
   </div>
