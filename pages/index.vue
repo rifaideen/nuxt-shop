@@ -89,11 +89,11 @@ export default {
     ...mapState(['store']),
     ...mapGetters('home', ['sliders', 'bestSellers', 'seasonalCollections', 'readyBoxes']),
   },
-  asyncData({ store }) {
+  async asyncData({ store }) {
     const storeId = store.state.store.id;
 
     if (!store.state.home.isLoaded || store.state.home.lastLoaded !== storeId) {
-      store.dispatch('home/getData', store.state.store.id);
+      await store.dispatch('home/getData', store.state.store.id);
     }
   },
 };
