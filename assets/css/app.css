@@ -1,0 +1,47 @@
+.dark {
+    background-color: #141414;
+    color: white;
+}
+
+.navbar-brand {
+    transform: translateX(-50%);
+    left: 50%;
+    position: absolute;
+}
+
+.navbar {
+    height: 100px;
+}
+
+.navbar-dark .navbar-toggler-custom {
+    color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+  
+.navbar-toggler-custom {
+    padding: 0.25rem 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-radius: 0.25rem;
+}
+
+.brand-sidebar-footer {
+    background: #fafafa;
+    color: #af9351;
+}
+
+.brand-sidebar-container {
+    background: #efe9dd;
+    padding: 30px 0;
+}
+
+.b-sidebar-body {
+    background: #fafafa;
+    color: #af9351;
+}

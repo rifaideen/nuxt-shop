@@ -1,16 +1,13 @@
 <template>
   <div class="dark">
-    <Header />
+    <LayoutHeader />
     <div class="container">
       <Nuxt />
     </div>
-    <Footer />
+    <LayoutFooter />
   </div>
 </template>
 
 <style scoped>
-.dark {
-  background-color: #141414;
-  color: white;
-}
+
 </style>
