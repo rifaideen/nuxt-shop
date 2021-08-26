@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="light">
+    <b-navbar toggleable="lg" type="dark" variant="light" fixed="top">
       <b-button
         v-b-toggle.sidebar-1
         class="navbar-toggler-custom collapsed btn btn-dark"
