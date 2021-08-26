@@ -1,6 +1,5 @@
 .dark {
-    background-color: #141414;
-    color: white;
+    background: whitesmoke;
 }
 
 .navbar-brand {
@@ -31,6 +30,10 @@
     border-radius: 0.25rem;
 }
 
+.navbar-toggler-custom:hover, .navbar-toggler-custom:active, .navbar-toggler-custom:focus {
+    background: #af9352;
+}
+
 .brand-sidebar-footer {
     background: #fafafa;
     color: #af9351;
@@ -44,4 +47,8 @@
 .b-sidebar-body {
     background: #fafafa;
     color: #af9351;
+}
+
+.navbar.bg-light {
+    background: #efe9dd !important;
 }

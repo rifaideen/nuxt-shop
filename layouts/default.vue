@@ -4,6 +4,7 @@
     <div class="container">
       <Nuxt />
     </div>
+    <LayoutMenu />
     <LayoutFooter />
   </div>
 </template>
