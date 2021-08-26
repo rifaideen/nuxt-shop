@@ -11,12 +11,12 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-4 mb-2" v-for="product in products" :key="product[idAttribute]">
-        <nuxt-link :to="`/product/${product[idAttribute]}`">
-          <b-card class="best-seller" :img-src="product[imageAttribute]">
+      <div class="col-4 mb-2" v-for="item in items" :key="item[idAttribute]">
+        <nuxt-link :to="`/${baseUrl}/${item[idAttribute]}`">
+          <b-card class="best-seller" :img-src="item[imageAttribute]">
             <b-card-title>
               <div class="row">
-                <div class="col-10">{{ product[titleAttribute] }}</div>
+                <div class="col-10">{{ item[titleAttribute] }}</div>
                 <div class="col-2 text-success">
                   <i class="fa fa-star"></i> &nbsp;
                 </div>
@@ -32,16 +32,16 @@
 <script>
 export default {
   props: {
+    items: {
+      type: [],
+      required: true,
+    },
     title: {
       type: String,
       required: true,
     },
     seeAllLink: {
       type: String,
-      required: true,
-    },
-    products: {
-      type: [],
       required: true,
     },
     idAttribute: {
@@ -55,6 +55,10 @@ export default {
     titleAttribute: {
       type: String,
       default: 'title',
+    },
+    baseUrl: {
+      type: String,
+      required: true,
     },
   },
 };
