@@ -11,6 +11,16 @@
         <!-- Ghraoui Chocolates -->
         <img src="logo.webp" alt="Logo" />
       </b-navbar-brand>
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav class="ml-auto">
+            <b-nav-item to="/notifications">
+              <b><i class="fa fa-bell fa-1x"></i></b>
+            </b-nav-item>
+            <b-nav-item to="/search">
+              <b><i class="fa fa-search fa-1x"></i></b>
+            </b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
     </b-navbar>
 
     <!-- Side Menu -->
