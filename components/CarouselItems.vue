@@ -11,14 +11,13 @@
   >
     <!-- Slides with custom text -->
     <b-carousel-slide
-      :img-src="collection.image"
-      v-for="collection in collections"
-      :key="collection.collection_id"
+      v-for="item in items" :key="item[idAttribute]"
+      :img-src="item.image"
       style="height: 500px"
     >
-      <div class="row">
+      <div class="row" v-if="hasActions">
         <div class="col text-left">
-          <nuxt-link :to="`/collection/${collection.collection_id}`">
+          <nuxt-link :to="`/${baseUrl}/${item[idAttribute]}`">
             <button class="btn btn-danger">Buy Now</button>
           </nuxt-link>
         </div>
@@ -30,9 +29,21 @@
 <script>
 export default {
   props: {
-    collections: {
+    items: {
       type: Array,
       required: true,
+    },
+    baseUrl: {
+      type: String,
+      required: true,
+    },
+    idAttribute: {
+      type: String,
+      default: 'id',
+    },
+    hasActions: {
+      type: Boolean,
+      default: false,
     },
   },
 };
