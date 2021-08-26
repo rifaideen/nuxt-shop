@@ -52,3 +52,11 @@
 .navbar.bg-light {
     background: #efe9dd !important;
 }
+
+.nav-link {
+    color: goldenrod !important;
+}
+
+.nuxt-link-exact-active {
+    color: #f85806 !important;
+}

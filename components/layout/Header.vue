@@ -118,7 +118,4 @@ export default {
 .bg-dark {
   background-color: #141414 !important;
 }
-.nuxt-link-exact-active {
-  color: goldenrod !important;
-}
 </style>
