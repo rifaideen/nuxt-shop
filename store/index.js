@@ -14,11 +14,27 @@ export const mutations = {
   setCities(state, cities) { state.cities = cities; },
   setCountry(state, country) { state.country = country; },
   setCountries(state, countries) { state.countries = countries; },
-  setStore(state, store) { state.store = store; },
+  setStore(state, payload) {
+    state.store = payload;
+
+    // handle the store-id cookie
+    if (payload === null) {
+      this.$cookies.remove('store-id');
+    } else {
+      this.$cookies.set('store-id', payload.id);
+    }
+  },
   setStores(state, stores) { state.stores = stores; },
 };
 
 export const actions = {
+  async nuxtServerInit({ dispatch }, { app }) {
+    const storeId = app.$cookies.get('store-id');
+
+    if (storeId) {
+      await dispatch('getStore', storeId);
+    }
+  },
   async getCountries({ commit }) {
     const { data } = await this.$axios.get('countries');
     commit('setCountries', data);
@@ -30,5 +46,10 @@ export const actions = {
   async getStores({ commit }, city) {
     const { data } = await this.$axios.get(`stores/${city}`);
     commit('setStores', data);
+  },
+  async getStore({ commit }, id) {
+    const { data } = await this.$axios.get(`store/${id}`);
+    const { store } = data.data;
+    commit('setStore', store);
   },
 };
