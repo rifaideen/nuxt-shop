@@ -81,7 +81,6 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  // layout: 'home',
   middleware: ['store-selection'],
   computed: {
     ...mapGetters('collections', {

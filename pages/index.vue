@@ -51,7 +51,6 @@ import { mapGetters, mapState } from 'vuex';
 
 export default {
   middleware: 'store-selection',
-  // layout: 'home',
   computed: {
     ...mapState(['store']),
     ...mapGetters('home', ['sliders', 'bestSellers', 'seasonalCollections', 'readyBoxes']),
