@@ -60,3 +60,8 @@
 .nuxt-link-exact-active {
     color: #f85806 !important;
 }
+
+.btn-danger {
+    background: #f85806;
+    color: white;
+}

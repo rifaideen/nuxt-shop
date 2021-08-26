@@ -9,7 +9,7 @@
           <h2>Our Best Sellers</h2>
         </div>
         <div class="col text-right">
-          <nuxt-link to="/best-sellers"> See All </nuxt-link>
+          <nuxt-link to="/best-sellers"> See All <i class="fa fa-chevron-right"></i></nuxt-link>
         </div>
       </div>
       <div class="row">
@@ -51,7 +51,7 @@
           <h2>Explore Our Packed Collections</h2>
         </div>
         <div class="col text-right">
-          <nuxt-link to="/ready-boxes"> See All </nuxt-link>
+          <nuxt-link to="/ready-boxes"> See All <i class="fa fa-chevron-right"></i></nuxt-link>
         </div>
       </div>
       <div class="row">
@@ -84,7 +84,7 @@ import { mapGetters, mapState } from 'vuex';
 
 export default {
   middleware: 'store-selection',
-  layout: 'home',
+  // layout: 'home',
   computed: {
     ...mapState(['store']),
     ...mapGetters('home', ['sliders', 'bestSellers', 'seasonalCollections', 'readyBoxes']),
