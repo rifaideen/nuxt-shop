@@ -14,7 +14,7 @@
           title="For Your Events"
           :items="eventCollections"
           see-all-link="/collections"
-          base-url="products"
+          base-url="collections"
         />
       </div>
 
@@ -63,7 +63,7 @@
           title="Explore Our Packed Collections"
           :items="packedCollections"
           see-all-link="/collections"
-          base-url="products"
+          base-url="collections"
         />
       </div>
     </template>

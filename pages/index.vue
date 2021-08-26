@@ -27,7 +27,7 @@
       <CarouselItems
         :items="seasonalCollections"
         id-attribute="collection_id"
-        base-url="products"
+        base-url="collections"
         has-actions
       />
     </div>
