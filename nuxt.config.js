@@ -40,6 +40,7 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
+    'cookie-universal-nuxt',
   ],
   axios: {
     baseURL: process.env.API_URL,
