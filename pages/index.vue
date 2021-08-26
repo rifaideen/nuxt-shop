@@ -1,6 +1,6 @@
 <template>
   <div>
-    <product-carousel :products="sliders" />
+    <product-carousel :products="sliders" :has-actions="true" id-attribute="product_id" />
 
     <!-- Best Sellers -->
     <div class="container mb-2">
