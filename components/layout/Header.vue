@@ -9,7 +9,7 @@
       </b-button>
       <b-navbar-brand to="/">
         <!-- Ghraoui Chocolates -->
-        <img src="logo.webp" alt="Logo" />
+        <img src="/logo.webp" alt="Logo" />
       </b-navbar-brand>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
@@ -22,6 +22,7 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
+    <div class="min-height-container"></div>
 
     <!-- Side Menu -->
     <b-sidebar
@@ -36,7 +37,7 @@
       <template #default>
         <div class="row brand-sidebar-container">
           <div class="offset-3 col align-items-center mt-2">
-            <img src="logo.webp" alt="" />
+            <img src="/logo.webp" alt="" />
           </div>
         </div>
         <div class="px-3 py-2 brand-sidebar-menu">
@@ -127,5 +128,8 @@ export default {
 <style scoped>
 .bg-dark {
   background-color: #141414 !important;
+}
+.min-height-container {
+  min-height: 100px;
 }
 </style>
