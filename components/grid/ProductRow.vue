@@ -12,7 +12,7 @@
     </div>
     <div class="row">
       <div class="col-4 mb-2" v-for="product in products" :key="product[idAttribute]">
-        <nuxt-link :to="`/product/${product.id}`">
+        <nuxt-link :to="`/product/${product[idAttribute]}`">
           <b-card class="best-seller" :img-src="product[imageAttribute]">
             <b-card-title>
               <div class="row">
