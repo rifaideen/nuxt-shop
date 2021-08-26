@@ -1,3 +1,7 @@
+/**
+ * Page: Home Page
+ * Type: Page specific.
+ */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-shadow */
 export const state = () => ({

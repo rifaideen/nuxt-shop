@@ -1,5 +1,6 @@
 /**
  * Page: Collections
+ * Type: Page specific.
  */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-shadow */
