@@ -15,7 +15,7 @@
           <b-nav-item to="/event-request">
             <b><i class="fa fa-box-open fa-1x"></i> Events</b>
           </b-nav-item>
-          <b-nav-item to="/cart">
+          <b-nav-item to="/basket">
             <b><i class="fa fa-shopping-basket fa-1x"></i> Basket</b>
           </b-nav-item>
         </b-navbar-nav>
