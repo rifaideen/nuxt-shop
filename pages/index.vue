@@ -1,6 +1,11 @@
 <template>
   <div>
-    <product-carousel :products="sliders" :has-actions="true" id-attribute="product_id" />
+    <CarouselItems
+      :items="sliders"
+      has-actions
+      id-attribute="product_id"
+      base-url="product"
+    />
 
     <!-- Best Sellers -->
     <div class="container mt-2">
@@ -18,15 +23,21 @@
           <h2>Season's Collection</h2>
         </div>
       </div>
-      <collection-carousel :collections="seasonalCollections" />
+      <CarouselItems
+        :items="seasonalCollections"
+        id-attribute="collection_id"
+        base-url="products"
+        has-actions
+      />
     </div>
 
     <!-- Explore our packed collections -->
     <div class="container">
-      <GridCollectionRow
+      <GridProductRow
         title="Explore Our Packed Collections"
-        :collections="readyBoxes"
+        :products="readyBoxes"
         see-all-link="/ready-boxes"
+        id-attribute="collection_id"
       />
     </div>
   </div>
