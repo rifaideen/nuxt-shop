@@ -2,7 +2,7 @@
   <div class="mb-2">
     <div class="row">
       <div class="col">
-        <h2>{{ title }}</h2>
+        <slot><h2>{{ title }}</h2></slot>
       </div>
       <div class="col text-right">
         <nuxt-link :to="seeAllLink">
@@ -38,7 +38,8 @@ export default {
     },
     title: {
       type: String,
-      required: true,
+      required: false,
+      default: null,
     },
     seeAllLink: {
       type: String,

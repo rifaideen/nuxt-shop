@@ -74,6 +74,10 @@ a {
     color: white;
 }
 
+.product-container {
+    background: #efe9dd;
+}
+
 .product-container p {
     color: gray;
 }
@@ -81,4 +85,8 @@ a {
 button.add-to-cart-btn {
     background: #af9352;
     border-color: #af9352;;
+}
+
+.orange-color {
+    color: #f85806;
 }
