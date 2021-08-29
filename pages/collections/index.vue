@@ -26,29 +26,31 @@
           </div>
         </div>
         <div
-          class="row"
+          class="row product-container shadow rounded-lg mb-3"
           v-for="collection in ourCollections"
           :key="collection.id"
         >
           <div class="col-4">
             <img
-              class="img-thumbnail"
+              class="img-fluid"
               :src="collection.image"
               :alt="collection.title"
             />
           </div>
           <div class="col-8">
-            <div class="row">
-              <div class="col-9">
-                <nuxt-link :to="`/collections/${collection.id}`">
+            <nuxt-link :to="`/collections/${collection.id}`">
+              <div class="row">
+                <div class="col-11">
                   <b>{{ collection.title }}</b>
-                </nuxt-link>
+                </div>
+                <div class="col-1">
+                  <span class="text-right">
+                    <i class="fa fa-chevron-right"></i>
+                  </span>
+                </div>
               </div>
-              <div class="col-1">
-                <span class="text-right">
-                  <i class="fa fa-chevron-right"></i>
-                </span>
-              </div>
+            </nuxt-link>
+            <div class="row">
               <div class="col-12">
                 <p>{{ collection.description }}</p>
               </div>
