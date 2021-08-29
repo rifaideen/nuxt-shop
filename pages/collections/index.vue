@@ -64,7 +64,7 @@
         <GridItemsRow
           title="Explore Our Packed Collections"
           :items="packedCollections"
-          see-all-link="/collections"
+          see-all-link="/packed-and-ready"
           base-url="collections"
         />
       </div>
