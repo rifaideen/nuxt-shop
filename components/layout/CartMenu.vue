@@ -66,10 +66,11 @@ export default {
     increaseQuantity() {
       const { unit_slug: unit } = this.product;
       const isKg = (['kg', 'kilogram'].indexOf(unit) > -1);
+      console.log({unit, isKg});
       let quantity = 0;
 
       if (this.quantity < 1) {
-        quantity = 0.1;
+        quantity = isKg ? 0.1 : 1;
       } else {
         quantity = isKg ? 0.5 : 1;
       }
