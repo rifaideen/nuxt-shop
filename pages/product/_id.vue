@@ -29,6 +29,7 @@
 <script>
 export default {
   middleware: ['store-selection'],
+  layout: 'nav-only',
   async asyncData({ $axios, params }) {
     const { data } = await $axios.get(`/product/${params.id}`, { params: { expand: 'images' } });
 
