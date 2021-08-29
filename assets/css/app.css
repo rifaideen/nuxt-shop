@@ -77,3 +77,8 @@ a {
 .product-container p {
     color: gray;
 }
+
+button.add-to-cart-btn {
+    background: #af9352;
+    border-color: #af9352;;
+}
