@@ -1,9 +1,6 @@
 <template>
   <div>
-    <ProductCarousel
-      :items="product.images"
-      image-key-attribute="original"
-    />
+    <ProductCarousel :items="product.images" image-key-attribute="original" />
 
     <div class="row product-container shadow mt-5 mb-2">
       <div class="col-12 mt-2 text-success text-right">
@@ -22,9 +19,10 @@
       see-all-link="/related-items"
       base-url="product"
     >
-    Related Items
+      Related Items
     </GridItemsRow>
 
+    <LayoutCartMenu :product="product" />
   </div>
 </template>
 

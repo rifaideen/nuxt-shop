@@ -90,3 +90,12 @@ button.add-to-cart-btn {
 .orange-color {
     color: #f85806;
 }
+
+.orange-bg {
+    background: #f85806;
+    color: #fff;
+}
+
+button.orange-bg {
+    border-color: #f85806;
+}
