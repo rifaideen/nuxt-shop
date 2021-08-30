@@ -109,3 +109,7 @@ button.orange-bg {
 button.golden-bg {
     border-color: #af9352;
 }
+
+button.orange-bg:hover, button.golden-bg:hover {
+    color: #fff;
+}
