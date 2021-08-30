@@ -15,7 +15,13 @@
       <template v-else>
         <div class="row mb-2 mt-4" v-for="item in items" :key="item.id">
           <div class="col-lg-10 product-container col-sm-12 shadow-lg rounded">
-            <CartItem :item="item" @item-deleted="$fetch" :currency="cart.currency" />
+            <CartItem
+              :item="item"
+              :currency="cart.currency"
+              @item-updated="$fetch"
+              @item-deleted="$fetch"
+              @item-saved-for-later="$fetch"
+            />
           </div>
         </div>
 
