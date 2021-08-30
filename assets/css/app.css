@@ -84,7 +84,7 @@ a {
 
 button.add-to-cart-btn {
     background: #af9352;
-    border-color: #af9352;;
+    border-color: #af9352;
 }
 
 .orange-color {
@@ -98,4 +98,14 @@ button.add-to-cart-btn {
 
 button.orange-bg {
     border-color: #f85806;
+}
+
+.golden-bg {
+    background: #af9352;
+    border-color: #af9352;
+    color: #fff;
+}
+
+button.golden-bg {
+    border-color: #af9352;
 }
