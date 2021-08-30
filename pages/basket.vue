@@ -1,21 +1,7 @@
 <template>
   <div>
     <div v-if="!$fetchState.pending">
-      <template v-if="cart">
-        <Cart :items="items" :cart="cart" />
-      </template>
-      <div class="row m-4" v-else>
-        <div class="col text-center">
-          <b>Your Ghraoui Basket is empty!</b>
-          <div class="m-4">
-              <img src="/logo.webp" alt="">
-          </div>
-          <nuxt-link to="/best-sellers">
-            <button class="btn golden-bg">Start Order</button>
-          </nuxt-link>
-        </div>
-      </div>
-
+      <ShoppingCart />
       <div class="mt-3 mb-2">
         <b>All Times Best Selling</b>
       </div>
@@ -30,33 +16,19 @@
 </template>
 
 <script>
-
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { mapGetters, mapActions } from 'vuex';
-
 export default {
+  name: 'Basket-Page',
   middleware: ['store-selection'],
-  computed: {
-    ...mapGetters('cart', ['created', 'cart', 'items']),
-  },
   data() {
     return {
       bestSellers: [],
     };
-  },
-  methods: {
-    ...mapActions('cart', ['get']),
   },
   async fetch() {
     const { id: storeId } = this.$store.state.store;
 
     const { data } = await this.$axios.get(`/best-sellers/${storeId}`);
     this.bestSellers = data.data;
-
-    // cart created?
-    if (this.created) {
-      await this.get();
-    }
   },
 };
 </script>
