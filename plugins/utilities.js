@@ -17,4 +17,14 @@ export default (context, inject) => {
   }
 
   inject('uid', uuidv4);
+
+  function toast(variant, title, content) {
+    this.$bvToast.toast(content, {
+      title,
+      variant,
+      solid: true,
+    });
+  }
+
+  inject('toast', toast);
 };
