@@ -92,4 +92,8 @@ export const actions = {
 
     return this.$axios.delete('/remove-from-cart', { data });
   },
+  // save cart item for later retrieval
+  saveForLater(context, id) {
+    return this.$axios.post(`/save-for-later/${id}`);
+  },
 };
