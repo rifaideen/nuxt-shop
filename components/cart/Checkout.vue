@@ -7,7 +7,8 @@
       </div>
       <div class="col rounded">
         <button class="btn btn-lg golden-bg">
-          <i class="fa fa-gift"></i> Send As A Gift
+          <i class="fa fa-gift"></i> <br>
+          Send As A Gift
         </button>
       </div>
     </div>
