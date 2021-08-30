@@ -5,7 +5,6 @@
         class="
           col-lg-10
           product-container
-          offset-lg-2
           col-sm-12
           shadow-lg
           rounded
@@ -20,7 +19,6 @@
         class="
           col-lg-10
           product-container
-          offset-lg-2
           col-sm-12
           shadow-lg
           rounded
