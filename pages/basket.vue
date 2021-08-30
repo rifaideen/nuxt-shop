@@ -4,6 +4,17 @@
       <template v-if="cart">
         <Cart :items="items" :cart="cart" />
       </template>
+      <div class="row m-4" v-else>
+        <div class="col text-center">
+          <b>Your Ghraoui Basket is empty!</b>
+          <div class="m-4">
+              <img src="/logo.webp" alt="">
+          </div>
+          <nuxt-link to="/best-sellers">
+            <button class="btn golden-bg">Start Order</button>
+          </nuxt-link>
+        </div>
+      </div>
 
       <div class="mt-3 mb-2">
         <b>All Times Best Selling</b>
