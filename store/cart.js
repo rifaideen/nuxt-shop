@@ -14,10 +14,10 @@ export const getters = {
     return state.id;
   },
   cart(state) {
-    return state.data.cart;
+    return state.data?.cart;
   },
   items(state) {
-    return state.data.items;
+    return state.data?.items;
   },
 };
 
