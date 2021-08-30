@@ -13,6 +13,12 @@ export const getters = {
   id(state) {
     return state.id;
   },
+  cart(state) {
+    return state.data.cart;
+  },
+  items(state) {
+    return state.data.items;
+  },
 };
 
 export const mutations = {
@@ -33,9 +39,9 @@ export const mutations = {
 
 export const actions = {
   // cart details
-  async get({ commit }, id) {
-    const { data } = await this.$axios.get(`/cart/${id}`);
-    commit('setData', data);
+  async get({ commit, state, rootState }) {
+    const { data } = await this.$axios.get(`/cart/${state.id}?device_id=${rootState.device_id}`);
+    commit('setData', data.data);
   },
   // create cart
   async create({ commit, rootState }) {
