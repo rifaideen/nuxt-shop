@@ -11,6 +11,7 @@ export const state = () => ({
   countries: [],
   store: null,
   stores: [],
+  device_id: null,
 });
 
 export const mutations = {
@@ -29,15 +30,31 @@ export const mutations = {
     }
   },
   setStores(state, stores) { state.stores = stores; },
+  setDeviceId(state, id) {
+    state.device_id = id;
+    this.$cookies.set('device-id', id);
+  },
 };
 
 export const actions = {
-  async nuxtServerInit({ dispatch }, { app }) {
+  async nuxtServerInit({ dispatch, commit }, { app }) {
     const storeId = app.$cookies.get('store-id');
+    const cartId = app.$cookies.get('cart-id');
+    let deviceId = app.$cookies.get('device-id');
 
     if (storeId) {
       await dispatch('getStore', storeId);
     }
+
+    if (cartId) {
+      await commit('cart/setId', cartId);
+    }
+
+    if (!deviceId) {
+      deviceId = app.$uid();
+    }
+
+    await commit('setDeviceId', deviceId);
   },
   async getCountries({ commit }) {
     const { data } = await this.$axios.get('countries');
