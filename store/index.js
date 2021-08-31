@@ -26,13 +26,17 @@ export const mutations = {
     if (payload === null) {
       this.$cookies.remove('store-id');
     } else {
-      this.$cookies.set('store-id', payload.id);
+      const expires = new Date();
+      expires.setDate(expires.getDate() + 7);
+      this.$cookies.set('store-id', payload.id, { expires });
     }
   },
   setStores(state, stores) { state.stores = stores; },
   setDeviceId(state, id) {
     state.device_id = id;
-    this.$cookies.set('device-id', id);
+    const expires = new Date();
+    expires.setDate(expires.getDate() + 365);
+    this.$cookies.set('device-id', id, { expires });
   },
 };
 

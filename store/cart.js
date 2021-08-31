@@ -32,9 +32,18 @@ export const mutations = {
     if (id === null) {
       this.$cookies.remove('cart-id');
     } else {
-      this.$cookies.set('cart-id', id);
+      const expires = new Date();
+      expires.setDate(expires.getDate() + 7);
+      this.$cookies.set('cart-id', id, { expires });
     }
   },
+  getItemByProductId: (state) => (id) => {
+    if (state.data === null || state.data.items.length === 0) {
+      return undefined;
+    }
+
+    return state.data.items.find((item) => (item.product_id === id));
+  }
 };
 
 export const actions = {
