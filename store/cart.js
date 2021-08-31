@@ -3,6 +3,7 @@
 export const state = () => ({
   data: null,
   id: null,
+  bestSellers: [],
 });
 
 export const getters = {
@@ -19,13 +20,26 @@ export const getters = {
   items(state) {
     return state.data?.items;
   },
+  bestSellers(state) {
+    const ids = [];
+
+    if (state.data?.items.length > 0) {
+      state.data.items.forEach(item => {
+        if (item.product_id) {
+          ids.push(item.product_id);
+        }
+      });
+    }
+
+    return state.bestSellers.filter((item) => ids.indexOf(item.id) === -1);
+  },
   getItemByProductId: (state) => (id) => {
     if (state.data === null || state.data.items.length === 0) {
       return undefined;
     }
 
     return state.data.items.find((item) => (item.product_id === id));
-  }
+  },
 };
 
 export const mutations = {
@@ -44,6 +58,9 @@ export const mutations = {
       this.$cookies.set('cart-id', id, { expires });
     }
   },
+  setBestSellers(state, bestSellers) {
+    state.bestSellers = bestSellers;
+  }
 };
 
 export const actions = {
@@ -104,5 +121,10 @@ export const actions = {
   // save cart item for later retrieval
   saveForLater(context, id) {
     return this.$axios.post(`/save-for-later/${id}`);
+  },
+  // get best sellers
+  async getBestSellers({ commit, getters, rootState }) {
+    const { data } = await this.$axios.get(`/best-sellers/${rootState.store.id}`);
+    commit('setBestSellers', data.data);
   },
 };
