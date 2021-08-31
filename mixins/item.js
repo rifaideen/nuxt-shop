@@ -9,7 +9,7 @@ export default {
       const isKg = (['kg', 'kilogram'].indexOf(unit) > -1);
       let quantity = 0;
 
-      if (this.item.quantity < 1) {
+      if (this.quantity < 1) {
         quantity = isKg ? 0.1 : 1;
       } else {
         quantity = isKg ? 0.5 : 1;
@@ -53,6 +53,34 @@ export default {
         this.$nuxt.error(error);
       }
     },
+    async addToCart() {
+      if (this.quantity <= 0) {
+        this.$toast('warning', 'Note', 'Please select the desired quantity');
+        return;
+      }
+
+      try {
+        if (!this.cartCreated) {
+          await this.create();
+        }
+
+        // eslint-disable-next-line camelcase
+        const { product_id } = this.item;
+
+        const { data } = await this.add({
+          product_id,
+          quantity: this.quantity,
+        });
+
+        if (data.success) {
+          this.isNew = false;
+          this.$toast('success', 'Success', data.message);
+          this.$emit('item-updated', product_id);
+        }
+      } catch (error) {
+        this.$nuxt.error(error);
+      }
+    },
     async removeFromCart() {
       try {
         const { item } = this;
@@ -61,7 +89,7 @@ export default {
         // reset item status
         if (data && data.success) {
           this.$toast('success', 'Success', data.message);
-          this.$emit('item-deleted');
+          this.$emit('item-deleted', item.product_id);
         } else {
           this.$toast('danger', 'Note', 'Unbale to remove item');
         }
@@ -97,6 +125,7 @@ export default {
     ...mapGetters(
       {
         cartId: 'cart/id',
+        cartCreated: 'cart/created',
       },
     ),
     total() {
