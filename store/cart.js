@@ -19,6 +19,13 @@ export const getters = {
   items(state) {
     return state.data?.items;
   },
+  getItemByProductId: (state) => (id) => {
+    if (state.data === null || state.data.items.length === 0) {
+      return undefined;
+    }
+
+    return state.data.items.find((item) => (item.product_id === id));
+  }
 };
 
 export const mutations = {
@@ -37,13 +44,6 @@ export const mutations = {
       this.$cookies.set('cart-id', id, { expires });
     }
   },
-  getItemByProductId: (state) => (id) => {
-    if (state.data === null || state.data.items.length === 0) {
-      return undefined;
-    }
-
-    return state.data.items.find((item) => (item.product_id === id));
-  }
 };
 
 export const actions = {
