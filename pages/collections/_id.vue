@@ -25,10 +25,12 @@
 </template>
 
 <script>
+import dynamicItem from '~/mixins/dynamic-item';
 
 export default {
   name: 'Collection-Details',
   middleware: ['store-selection'],
+  mixins: [dynamicItem],
   data() {
     return {
       selectedItem: null,
@@ -62,50 +64,6 @@ export default {
     } catch (e) {
       error(e);
     }
-  },
-  methods: {
-    /**
-     * Make it non existing item, manually construct selected item
-     * and display the modal.
-     */
-    onAddToBasket(product) {
-      this.existingItem = false;
-      const item = {
-        name: product.title,
-        product_id: product.id,
-        ...product,
-      };
-      this.selectedItem = item;
-      this.showModal();
-    },
-    // handles increase-quantity event from CartControls component.
-    onIncreaseQuantity(item) {
-      this.existingItem = true;
-      this.selectedItem = item;
-      this.showModal();
-    },
-    // handles decrease-quantity event from CartControls component.
-    onDecreaseQuantity(item) {
-      this.existingItem = true;
-      this.selectedItem = item;
-      this.showModal();
-    },
-    showModal() {
-      this.$nextTick(function () {
-        this.$bvModal.show('cart-controls');
-      });
-    },
-    // handles item-updated and item-deleted event from CartControls component.
-    async onItemUpdated(productId) {
-      this.selectedItem = null;
-      this.$bvModal.hide('cart-controls');
-      // get updated cart details
-      await this.$store.dispatch('cart/get');
-
-      // We have added reference to each ListProduct with their product id.
-      // call the component by the reference and ask it to refresh it's data.
-      this.$refs[`ListProduct-${productId}`][0].refresh();
-    },
   },
 };
 </script>
