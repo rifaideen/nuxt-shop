@@ -48,13 +48,15 @@ export default {
     ...mapGetters('cart', ['created', 'cart', 'items']),
   },
   methods: {
-    ...mapActions('cart', ['get']),
+    ...mapActions('cart', ['get', 'create']),
   },
   async fetch() {
     // cart created?
-    if (this.created) {
-      await this.get();
+    if (!this.created) {
+      await this.create();
     }
+
+    await this.get();
   },
 };
 </script>
