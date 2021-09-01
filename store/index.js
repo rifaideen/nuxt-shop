@@ -12,6 +12,7 @@ export const state = () => ({
   store: null,
   stores: [],
   device_id: null,
+  navigationTitle: null,
 });
 
 export const mutations = {
@@ -37,6 +38,9 @@ export const mutations = {
     const expires = new Date();
     expires.setDate(expires.getDate() + 365);
     this.$cookies.set('device-id', id, { expires });
+  },
+  setNavigationTitle(state, title) {
+    state.navigationTitle = title;
   },
 };
 
