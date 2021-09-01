@@ -37,7 +37,7 @@
       <GridItemsRow
         title="Explore Our Packed Collections"
         :items="readyBoxes"
-        see-all-link="/ready-boxes"
+        see-all-link="/packed-and-ready"
         id-attribute="collection_id"
         base-url="product"
       />
