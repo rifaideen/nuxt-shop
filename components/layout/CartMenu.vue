@@ -83,7 +83,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions('cart', ['create', 'add', 'viewItem', 'removeItem']),
+    ...mapActions('cart', ['create', 'get', 'add', 'viewItem', 'removeItem']),
     // find if the given route is active route
     active(route) {
       return this.activeRoute === route;
@@ -133,6 +133,7 @@ export default {
         if (data.success) {
           this.isNew = false;
           this.$toast('success', 'Success', data.message);
+          this.get();
         }
       } catch (error) {
         this.$nuxt.error(error);
@@ -148,6 +149,7 @@ export default {
             this.isNew = true;
             this.quantity = 1;
             this.$toast('success', 'Success', data.message);
+            this.get();
           } else {
             this.$toast('danger', 'Note', 'Unbale to remove item');
           }
