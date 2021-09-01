@@ -4,7 +4,10 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item @click="$goBack">
-            <b><i class="fa fa-chevron-left fa-2x"></i></b>
+              <div class="nav-title">
+                <i class="fa fa-chevron-left"></i>
+                <span v-if="title !== null">{{ title }}</span>
+              </div>
           </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
@@ -38,11 +41,20 @@ export default {
     BNavbar,
     BNavbarBrand,
   },
+  computed: {
+    title() {
+      return this.$store.state.navigationTitle;
+    },
+  },
 };
 </script>
 
 <style scoped>
 .min-height-container {
   min-height: 100px;
+}
+.nav-title {
+  font-size: 2rem;
+  display: block;
 }
 </style>
