@@ -5,6 +5,7 @@ import {
   confirmed,
   email,
   min,
+  max,
   required,
 } from 'vee-validate/dist/rules';
 
@@ -18,6 +19,10 @@ extend('email', {
 
 extend('min', {
   ...min,
+});
+
+extend('max', {
+  ...max,
 });
 
 extend('required', {
