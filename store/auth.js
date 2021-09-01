@@ -24,6 +24,7 @@ export const mutations = {
   },
   setToken(state, token) {
     state.token = token;
+    state.authenticated = token !== null;
 
     if (token === null) {
       this.$cookies.remove('auth-token');

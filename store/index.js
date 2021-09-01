@@ -48,6 +48,7 @@ export const actions = {
   async nuxtServerInit({ dispatch, commit }, { app }) {
     const storeId = app.$cookies.get('store-id');
     const cartId = app.$cookies.get('cart-id');
+    const token = app.$cookies.get('auth-token');
     let deviceId = app.$cookies.get('device-id');
 
     if (storeId) {
@@ -56,6 +57,10 @@ export const actions = {
 
     if (cartId) {
       await commit('cart/setId', cartId);
+    }
+
+    if (token) {
+      await commit('auth/setToken', token);
     }
 
     if (!deviceId) {
