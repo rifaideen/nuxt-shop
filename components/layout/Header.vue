@@ -76,7 +76,7 @@
           </div>
 
           <!-- Menu 3 -->
-          <div class="row mb-2">
+          <div class="row mb-3">
             <div class="col-12 mb-2">
               <i class="fa fa-flag"></i> Country
             </div>
@@ -87,6 +87,28 @@
             <div class="col-12 mb-2">
               <i class="fa fa-language"></i>
               Language
+            </div>
+          </div>
+
+          <!-- Menu 4 -->
+          <div class="row mb-3">
+            <div class="col-12 mb-2">
+              <i class="fa fa-store"></i> Our Boutiques
+            </div>
+          </div>
+
+          <!-- Menu 5 -->
+          <div class="row mb-2">
+            <div class="col-12 mb-2">
+              <nuxt-link to="/sign-up">
+                <i class="fa fa-edit"></i> Sign Up
+              </nuxt-link>
+            </div>
+            <div class="col-12 mb-2">
+              <nuxt-link to="/login">
+                <i class="fa fa-sign-in-alt"></i>
+                Login
+              </nuxt-link>
             </div>
           </div>
         </div>
