@@ -20,6 +20,9 @@ export const getters = {
   items(state) {
     return state.data?.items;
   },
+  hasItems(state, getters) {
+    return getters.items.length > 0;
+  },
   bestSellers(state) {
     const ids = [];
 
