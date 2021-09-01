@@ -30,13 +30,30 @@
 export default {
   middleware: ['store-selection'],
   layout: 'nav-only',
-  async asyncData({ $axios, params }) {
-    const { data } = await $axios.get(`/product/${params.id}`, { params: { expand: 'images' } });
+  async asyncData({
+    $axios, params, store, error,
+  }) {
+    try {
+      store.commit('setNavigationTitle', null);
+      const { data } = await $axios.get(`/product/${params.id}`, { params: { expand: 'images' } });
 
-    return {
-      product: data.data.product,
-      related: data.data.relatedProducts,
-    };
+      return {
+        product: data.data.product,
+        related: data.data.relatedProducts,
+      };
+    } catch (e) {
+      if (e.isAxiosError) {
+        return error({
+          statusCode: e.response.status,
+          message: e.response.statusText,
+        });
+      }
+
+      return error({
+        statusCode: 400,
+        message: 'Oops! It looks like the requested collection does not exists.',
+      });
+    }
   },
 };
 </script>
