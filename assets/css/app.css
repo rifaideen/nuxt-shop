@@ -113,3 +113,11 @@ button.golden-bg {
 button.orange-bg:hover, button.golden-bg:hover {
     color: #fff;
 }
+
+.golden-color {
+    color: #af9352;
+}
+
+button.btn-logout {
+    border: none;
+}

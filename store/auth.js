@@ -8,7 +8,7 @@ export const state = () => ({
 
 export const getters = {
   isAuthenticated(state) {
-    return state.isAuthenticated && state.token !== null;
+    return state.authenticated && state.token !== null;
   },
   token(state) {
     return state.token;
@@ -43,9 +43,9 @@ export const actions = {
     return this.$axios.post('/login', payload);
   },
   logout({ state }) {
-    return this.$axios.post('/logout', {}, {
-      Authorization: `Bearer ${state.token}`,
-    });
+    this.$axios.setHeader('Authorization', `Bearer ${state.token}`);
+
+    return this.$axios.post('/logout');
   },
   authenticate({ commit }, { user, token }) {
     commit('setUser', user);

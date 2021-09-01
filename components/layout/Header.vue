@@ -61,7 +61,7 @@
           </div>
 
           <!-- Menu 2 -->
-          <div class="row mb-5">
+          <div class="row mb-5" v-if="isAuthenticated">
             <div class="col-12 mb-2">
               <i class="fa fa-globe-asia"></i> Delivery Locations
             </div>
@@ -99,16 +99,22 @@
 
           <!-- Menu 5 -->
           <div class="row mb-2">
-            <div class="col-12 mb-2">
+            <div class="col-12 mb-2" v-if="!isAuthenticated">
               <nuxt-link to="/sign-up">
                 <i class="fa fa-edit"></i> Sign Up
               </nuxt-link>
             </div>
-            <div class="col-12 mb-2">
+            <div class="col-12 mb-2" v-if="!isAuthenticated">
               <nuxt-link to="/login">
                 <i class="fa fa-sign-in-alt"></i>
                 Login
               </nuxt-link>
+            </div>
+            <div class="col-12 mb-2" v-else>
+              <button class="btn golden-color btn-logout" @click="logoutUser">
+                <i class="fa fa-sign-in-alt"></i>
+                Logut
+              </button>
             </div>
           </div>
         </div>
@@ -123,6 +129,8 @@
 </template>
 
 <script>
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { mapGetters, mapActions } from 'vuex';
 import {
   BNavbar, BNavbarBrand,
 } from 'bootstrap-vue';
@@ -133,15 +141,32 @@ export default {
     BNavbarBrand,
   },
   computed: {
+    ...mapGetters('auth', ['isAuthenticated']),
     // current active route name
     activeRoute() {
       return this.$route.name;
     },
   },
   methods: {
+    ...mapActions('auth', ['logout', 'forget']),
     // find if the given route is active route
     active(route) {
       return this.activeRoute === route;
+    },
+    async logoutUser() {
+      try {
+        // send logout request and forget the user upon sucessfull call.
+        const { data } = await this.logout();
+
+        if (data.success) {
+          this.$toast('success', 'Success', data.message);
+        } else {
+          this.$toast('error', 'Error', data.message);
+        }
+        this.forget();
+      } catch (error) {
+        this.$nuxt.error(error);
+      }
     },
   },
 };
