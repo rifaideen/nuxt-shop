@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1 @click="$goBack">
-      <i class="fa fa-chevron-left"></i>
-      Packed & Ready
-    </h1>
-    <p>Buy Our Elegantly PAcked Boxes</p>
+    <div class="row mt-2 mb-2">
+      <div class="col">
+        <p>Buy Our Elegantly Packed Boxes</p>
+      </div>
+    </div>
 
     <div
       class="row product-container shadow rounded-lg mb-3"
@@ -45,6 +45,7 @@
 export default {
   name: 'Packed-Ready',
   middleware: ['store-selection'],
+  layout: 'nav-only',
   head() {
     return {
       title: 'Packed & Ready Collections',
@@ -53,6 +54,7 @@ export default {
   async asyncData({ $axios, store }) {
     const storeId = store.state.store.id;
     const { data } = await $axios.get('/collections', { params: { store_id: storeId, type: 'mixed' } });
+    store.commit('setNavigationTitle', 'Packed & Ready');
 
     return {
       collections: data.data,
