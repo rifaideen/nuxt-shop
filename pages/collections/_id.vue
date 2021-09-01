@@ -1,9 +1,5 @@
 <template>
-  <div>
-    <h1 @click="$goBack">
-      <i class="fa fa-chevron-left"></i>
-      {{ collection.title }}
-    </h1>
+  <div class="mt-2">
     <ListProduct
       :product="product"
       v-for="product in products"
@@ -30,6 +26,7 @@ import dynamicItem from '~/mixins/dynamic-item';
 export default {
   name: 'Collection-Details',
   middleware: ['store-selection'],
+  layout: 'nav-only',
   mixins: [dynamicItem],
   data() {
     return {
@@ -54,15 +51,25 @@ export default {
       }
 
       const results = await Promise.all(items);
+      store.commit('setNavigationTitle', results[0].data.data.title);
 
       return {
         id: collectionId,
-        collection: results[0].data.data,
         products: results[1].data.data,
         links: results[1].data.links,
       };
     } catch (e) {
-      error(e);
+      if (e.isAxiosError) {
+        return error({
+          statusCode: e.response.status,
+          message: e.response.statusText,
+        });
+      }
+
+      return error({
+        statusCode: 400,
+        message: 'Oops! It looks like the requested collection does not exists.',
+      });
     }
   },
 };
