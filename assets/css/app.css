@@ -121,3 +121,11 @@ button.orange-bg:hover, button.golden-bg:hover {
 button.btn-logout {
     border: none;
 }
+
+.light-bg-container {
+    background: #efe9dd;
+}
+
+.order-summary {
+    color: #141414;
+}
