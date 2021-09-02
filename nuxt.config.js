@@ -26,6 +26,7 @@ export default {
   plugins: [
     '~/plugins/utilities',
     '~/plugins/vee-validate',
+    '~/plugins/axios',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
