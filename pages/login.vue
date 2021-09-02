@@ -49,6 +49,12 @@
         </div>
       </form>
     </ValidationObserver>
+    <div style="height:350px"></div>
+    <div class="row">
+        <div class="col text-center">
+          <nuxt-link to="/sign-up">Sign Up</nuxt-link>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -79,7 +85,7 @@ export default {
     store.commit('setNavigationTitle', null);
   },
   methods: {
-    ...mapActions('auth', ['authenticate', 'login']),
+    ...mapActions('auth', ['authenticate', 'login', 'pullMessage']),
     async onFormValid() {
       try {
         // Prepare payload
@@ -107,6 +113,13 @@ export default {
         }
       }
     },
+  },
+  async mounted() {
+    const message = await this.pullMessage();
+
+    if (message) {
+      this.$toast(message.variant, message.title, message.description);
+    }
   },
 };
 </script>
