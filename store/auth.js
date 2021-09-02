@@ -4,6 +4,7 @@ export const state = () => ({
   authenticated: false,
   token: null,
   user: null,
+  message: null,
 });
 
 export const getters = {
@@ -34,6 +35,9 @@ export const mutations = {
       this.$cookies.set('auth-token', token, { expires });
     }
   },
+  setMessage(state, message) {
+    state.message = message;
+  },
 };
 export const actions = {
   signup(context, payload) {
@@ -54,5 +58,11 @@ export const actions = {
   forget({ commit }) {
     commit('setUser', null);
     commit('setToken', null);
+  },
+  pullMessage({ commit, state }) {
+    const { message } = state;
+    commit('setMessage', null);
+
+    return message;
   },
 };
