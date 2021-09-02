@@ -70,8 +70,10 @@
               Gift Recipients
             </div>
             <div class="col-12 mb-2">
-              <i class="fa fa-user-circle"></i>
-              Account
+              <nuxt-link to="/account">
+                <i class="fa fa-user-circle"></i>
+                Account
+              </nuxt-link>
             </div>
           </div>
 

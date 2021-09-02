@@ -59,5 +59,6 @@ export default {
 .nav-title {
   font-size: 2rem;
   display: block;
+  color: #564227;
 }
 </style>
