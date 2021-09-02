@@ -58,7 +58,7 @@ export const mutations = {
     } else {
       const expires = new Date();
       expires.setDate(expires.getDate() + 7);
-      this.$cookies.set('cart-id', id, { expires });
+      this.$cookies.set('cart-id', id, { path: '/', expires });
     }
   },
   setBestSellers(state, bestSellers) {

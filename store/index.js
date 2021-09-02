@@ -29,7 +29,7 @@ export const mutations = {
     } else {
       const expires = new Date();
       expires.setDate(expires.getDate() + 7);
-      this.$cookies.set('store-id', payload.id, { expires });
+      this.$cookies.set('store-id', payload.id, { path: '/', expires });
     }
   },
   setStores(state, stores) { state.stores = stores; },
@@ -37,7 +37,7 @@ export const mutations = {
     state.device_id = id;
     const expires = new Date();
     expires.setDate(expires.getDate() + 365);
-    this.$cookies.set('device-id', id, { expires });
+    this.$cookies.set('device-id', id, { path: '/', expires });
   },
   setNavigationTitle(state, title) {
     state.navigationTitle = title;

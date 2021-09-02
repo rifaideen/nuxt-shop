@@ -32,7 +32,7 @@ export const mutations = {
     } else {
       const expires = new Date();
       expires.setDate(expires.getDate() + 7);
-      this.$cookies.set('auth-token', token, { expires });
+      this.$cookies.set('auth-token', token, { path: '/', expires });
     }
   },
   setMessage(state, message) {
