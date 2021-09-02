@@ -58,7 +58,20 @@
             <div class="invalid-feedback">{{ errors[0] }}</div>
           </div>
         </ValidationProvider>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="row">
+          <div class="col-lg-2 col-sm-6">
+            <button
+              type="button"
+              class="btn btn-block golden-bg"
+              @click="$router.go(-1)"
+            >
+              Cancel
+            </button>
+          </div>
+          <div class="col-lg-2 col-sm-6">
+            <button type="submit" class="btn btn-block orange-bg">Save</button>
+          </div>
+        </div>
       </form>
     </ValidationObserver>
   </div>
@@ -80,7 +93,7 @@ export default {
   },
   async asyncData({ store, $axios, error: $error }) {
     try {
-      store.commit('setNavigationTitle', null);
+      store.commit('setNavigationTitle', 'Edit Profile');
       const { data: user } = await $axios.get('/profile', {
         params: {
           fields: 'first_name,last_name,email,mobile',
