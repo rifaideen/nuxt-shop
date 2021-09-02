@@ -4,6 +4,7 @@ export const state = () => ({
   data: null,
   id: null,
   bestSellers: [],
+  isGift: false,
 });
 
 export const getters = {
@@ -63,7 +64,10 @@ export const mutations = {
   },
   setBestSellers(state, bestSellers) {
     state.bestSellers = bestSellers;
-  }
+  },
+  setIsGift(state, isGift) {
+    state.isGift = isGift;
+  },
 };
 
 export const actions = {
