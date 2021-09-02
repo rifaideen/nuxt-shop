@@ -3,7 +3,7 @@
     <ProductCarousel :items="product.images" image-key-attribute="original" />
 
     <div class="row product-container shadow mt-5 mb-2">
-      <div class="col-12 mt-2 text-success text-right">
+      <div class="col-12 mt-2 text-right" :class="favouriteClass">
         <i class="fa fa-star"></i>
       </div>
       <div class="col-12">
@@ -54,6 +54,11 @@ export default {
         message: 'Oops! It looks like the requested collection does not exists.',
       });
     }
+  },
+  computed: {
+    favouriteClass() {
+      return this.product.is_favourite ? 'is-favourite' : 'is-not-favourite';
+    },
   },
 };
 </script>
