@@ -123,7 +123,7 @@ export default {
         // Prepare payload
         const payload = {
           first_name: this.firstName,
-          lasst_name: this.lastName,
+          last_name: this.lastName,
           email: this.email,
           mobile_number: this.mobileNumber,
           password: this.password,
