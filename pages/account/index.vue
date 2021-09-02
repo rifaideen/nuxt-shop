@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row account-menu shadow rounded mt-4 mb-2">
       <div class="col-lg-5 col-sm-12">
-        <nuxt-link to="/acount/edit-profile">
+        <nuxt-link to="/account/edit-profile">
           <div class="row">
             <div class="col-lg-8 col-sm-10">Edit Profile</div>
             <div class="col">
@@ -14,7 +14,7 @@
     </div>
     <div class="row account-menu shadow rounded mb-2">
       <div class="col-lg-5 col-sm-12">
-        <nuxt-link to="/acount/change-password">
+        <nuxt-link to="/account/change-password">
           <div class="row">
             <div class="col-lg-8 col-sm-10">Change Password</div>
             <div class="col">
