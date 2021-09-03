@@ -5,6 +5,8 @@ export const state = () => ({
   id: null,
   bestSellers: [],
   isGift: false,
+  deliveryLocation: null,
+  giftRecipient: null,
 });
 
 export const getters = {
@@ -68,6 +70,12 @@ export const mutations = {
   setIsGift(state, isGift) {
     state.isGift = isGift;
   },
+  setDeliveryLocation(state, deliveryLocation) {
+    state.deliveryLocation = deliveryLocation;
+  },
+  setGiftRecipient(state, giftRecipient) {
+    state.giftRecipient = giftRecipient;
+  }
 };
 
 export const actions = {
