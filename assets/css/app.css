@@ -137,3 +137,7 @@ button.btn-logout {
 .is-not-favourite {
     color: gray;
 }
+
+#map-container {
+    height: 300px;
+}

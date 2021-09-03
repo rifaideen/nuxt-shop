@@ -56,5 +56,6 @@ export default {
   },
   publicRuntimeConfig: {
     exludeStoreSelection: ['about'],
+    googleApiKey: process.env.GOOGLE_API_KEY,
   },
 };
