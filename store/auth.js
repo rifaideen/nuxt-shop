@@ -40,6 +40,10 @@ export const mutations = {
   },
 };
 export const actions = {
+  async getUser({ commit }) {
+    const { data: user } = await this.$axios.get('/profile');
+    commit('setUser', user);
+  },
   signup(context, payload) {
     return this.$axios.post('/signup', payload);
   },
