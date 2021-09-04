@@ -1,6 +1,6 @@
 <template>
   <div class="mt-4">
-    <ListDeliveryLocation
+    <ListLocation
       v-for="location in deliveryLocations"
       :location="location"
       :action="action"
