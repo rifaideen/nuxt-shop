@@ -7,7 +7,7 @@
             <b><i class="fa fa-fan fa-2x"></i><br/> Home</b>
           </b-nav-item>
           <b-nav-item to="/collections">
-            <b><i class="fa fa-cookie fa-2x"></i><br/> Collections</b>
+            <b><i class="fa fa-cookie-bite fa-2x"></i><br/> Collections</b>
           </b-nav-item>
           <b-nav-item to="/create-box">
             <b><i class="fa fa-box-open fa-2x"></i><br/> Create Box</b>
