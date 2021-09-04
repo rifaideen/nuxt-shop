@@ -80,7 +80,7 @@
                 <option>9 AM to 12 PM</option>
                 <option>12 PM to 3 PM</option>
                 <option>3 PM to 6 PM</option>
-                <option>6 AM to 9 PM</option>
+                <option>6 PM to 9 PM</option>
               </select>
             </div>
           </div>
@@ -108,7 +108,7 @@
 
 <script>
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'CheckoutPage',
@@ -164,15 +164,19 @@ export default {
     },
   },
   methods: {
-    checkout() {
+    ...mapActions('cart', ['clearCart']),
+    async checkout() {
       if (this.validate()) {
         // prepare payload
         const payload = {
-          preferred_delivery_date: this.preferred_delivery_date,
-          preferred_delivery_time: this.preferred_delivery_time,
           notes: this.notes,
-          payment_info: { payment_ref: '#1234', status: 'success' },
+          payment_info: "{ payment_ref: '#1234', status: 'success' }",
         };
+
+        if (this.preferedDelivery) {
+          payload.preferred_delivery_date = this.preferred_delivery_date;
+          payload.preferred_delivery_time = this.preferred_delivery_time;
+        }
 
         if (this.isGiftCheckout) {
           payload.gift_recipient_id = this.giftRecipient.id;
@@ -181,6 +185,19 @@ export default {
         }
 
         // call the payment gateway and hit the checkout api
+        try {
+          const { data } = await this.$axios.post(`/checkout/${this.cart.id}`, payload);
+
+          if (data.success) {
+            // clear cart and redirect to order success page.
+            this.clearCart();
+            this.$router.push('/order-placed');
+          } else {
+            this.$toast('danger', 'error', data.message);
+          }
+        } catch (error) {
+          this.$toast('danger', 'error', error.message);
+        }
       }
     },
     validate() {
@@ -204,8 +221,6 @@ export default {
 
       if (hasError) {
         this.$toast('danger', 'Error', message);
-      } else {
-        this.$toast('success', 'Success', 'Form Valid');
       }
 
       return !hasError;

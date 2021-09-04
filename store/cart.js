@@ -142,4 +142,7 @@ export const actions = {
     const { data } = await this.$axios.get(`/best-sellers/${rootState.store.id}`);
     commit('setBestSellers', data.data);
   },
+  async clearCart({ commit }) {
+    commit('setId', null);
+  }
 };
