@@ -4,7 +4,7 @@
       <div class="col-12 mt-2 mb-2">
         <div class="row">
           <div class="col-11">
-            <b class="title">{{ location.name }}</b>
+            <b class="title">{{ isGiftRecipient ? location.full_name : location.name }}</b>
           </div>
           <div class="col-1 text-center">
             <b class="title"><i class="fa fa-chevron-right"></i></b>
@@ -37,7 +37,7 @@ export default {
     ...mapMutations('cart', ['setDeliveryLocation']),
     navigate() {
       if (this.action === 'edit') {
-        const route = this.isGiftRecipient ? 'gift-recipient' : 'delivery-locations';
+        const route = this.isGiftRecipient ? 'gift-recipients' : 'delivery-locations';
         this.$router.push(`/${route}/edit/${this.location.id}`);
       } else {
         this.setDeliveryLocation(this.location);
