@@ -37,7 +37,7 @@ export default {
     ...mapMutations('cart', ['setDeliveryLocation']),
     navigate() {
       if (this.action === 'edit') {
-        this.$router.push(`/delivery-location/edit/${this.location.id}`);
+        this.$router.push(`/delivery-locations/edit/${this.location.id}`);
       } else {
         this.setDeliveryLocation(this.location);
         this.$router.push('/checkout');

@@ -116,15 +116,19 @@ export default {
     },
   },
   mounted() {
-    const loader = new Loader({
-      apiKey: this.$config.googleApiKey,
-      version: 'weekly',
-      libraries: ['places'],
-    });
+    if (!window.google) {
+      const loader = new Loader({
+        apiKey: this.$config.googleApiKey,
+        version: 'weekly',
+        libraries: ['places'],
+      });
 
-    loader.load().then(this.initialize).catch((e) => {
-      console.error(e);
-    });
+      loader.load().then(this.initialize).catch((e) => {
+        console.error(e);
+      });
+    } else {
+      this.initialize(window.google);
+    }
   },
 };
 </script>
