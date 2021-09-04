@@ -1,5 +1,5 @@
 <template>
-  <div class="row text-center mt-4">
+  <div class="row text-center mt-5 min-vh-100">
     <div class="col">
       <h3 class="mb-2">Your Order Is Placed</h3>
       <p>You'll now receive confirmation on your email and mobile number.</p>
