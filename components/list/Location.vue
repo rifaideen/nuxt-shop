@@ -34,13 +34,18 @@ import { mapMutations } from 'vuex';
 export default {
   props: ['location', 'action', 'isGiftRecipient'],
   methods: {
-    ...mapMutations('cart', ['setDeliveryLocation']),
+    ...mapMutations('cart', ['setDeliveryLocation', 'setGiftRecipient']),
     navigate() {
       if (this.action === 'edit') {
         const route = this.isGiftRecipient ? 'gift-recipients' : 'delivery-locations';
         this.$router.push(`/${route}/edit/${this.location.id}`);
       } else {
-        this.setDeliveryLocation(this.location);
+        if (this.isGiftRecipient) {
+          this.setGiftRecipient(this.location);
+        } else {
+          this.setDeliveryLocation(this.location);
+        }
+
         this.$router.push('/checkout');
       }
     },
