@@ -2,7 +2,17 @@
   <div>
     <div class="rounded light-bg-container">
       <div class="row m-4 mt-4">
-        <div class="col-12 mt-4 mb-4">
+        <div class="col-12 mt-4">
+          <template v-if="!isGiftCheckout && deliveryLocation">
+            <b class="orange-color">Delivery To:</b>
+            <CheckoutDeliveryComponent :location="deliveryLocation" />
+          </template>
+          <template v-if="isGiftCheckout && giftRecipient">
+            <b class="orange-color">Recipient Details:</b>
+            <CheckoutDeliveryComponent :location="giftRecipient" />
+          </template>
+        </div>
+        <div class="col-12 mb-4">
           <button
             class="btn btn-block golden-bg text-uppercase"
             @click="$router.push(addressLinks.select)"
@@ -65,7 +75,9 @@
           <div class="col-6">
             <h4 class="orange-color">Order Summary:</h4>
           </div>
-          <div class="col-6 text-right"><sub><i>Price Inclusive of taxes</i></sub></div>
+          <div class="col-6 text-right">
+            <sub><i>Price Inclusive of taxes</i></sub>
+          </div>
         </div>
         <!-- Products List -->
         <div class="row mb-2" v-for="item in items" :key="item.id">
@@ -87,11 +99,15 @@
         </div>
         <div class="row mt-2">
           <div class="col-6">VAT {{ cart.tax_percentage }}%</div>
-          <div class="col-6 text-right">{{ cart.tax_amount }} {{ cart.currency }}</div>
+          <div class="col-6 text-right">
+            {{ cart.tax_amount }} {{ cart.currency }}
+          </div>
         </div>
         <div class="row mt-2">
           <div class="col-6">Delivery Charge</div>
-          <div class="col-6 text-right">{{ cart.delivery_charge }} {{ cart.currency }}</div>
+          <div class="col-6 text-right">
+            {{ cart.delivery_charge }} {{ cart.currency }}
+          </div>
         </div>
         <hr />
 
@@ -124,6 +140,9 @@
 </template>
 
 <script>
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { mapState } from 'vuex';
+
 export default {
   name: 'CheckoutPage',
   layout: 'nav-only',
@@ -142,6 +161,7 @@ export default {
     };
   },
   computed: {
+    ...mapState('cart', ['deliveryLocation', 'giftRecipient']),
     isGiftCheckout() {
       return this.$store.state.cart.isGift;
     },
@@ -154,14 +174,14 @@ export default {
     addressLinks() {
       if (!this.isGiftCheckout) {
         return {
-          select: '/delivery-locations',
-          new: '/delivery-locations/new',
+          select: '/delivery-locations?a=select',
+          new: '/delivery-locations/new?a=select',
         };
       }
 
       return {
-        select: '/gift-recipients',
-        new: '/gift-recipients/new',
+        select: '/gift-recipients?a=select',
+        new: '/gift-recipients/new?a=select',
       };
     },
   },
