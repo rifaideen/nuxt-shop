@@ -19,7 +19,9 @@
 
 <script>
 export default {
-  async asyncData({ $axios, query }) {
+  layout: 'navigationOnly',
+  async asyncData({ $axios, query, store }) {
+    store.commit('setNavigationTitle', 'Delivery Locations');
     const { data } = await $axios.get('/delivery-locations?expand=country');
 
     return {

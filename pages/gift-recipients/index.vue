@@ -20,7 +20,9 @@
 
 <script>
 export default {
-  async asyncData({ $axios, query }) {
+  layout: 'navigationOnly',
+  async asyncData({ $axios, query, store }) {
+    store.commit('setNavigationTitle', 'Gift Recipients');
     const { data } = await $axios.get('/gift-recipients?expand=country');
 
     return {

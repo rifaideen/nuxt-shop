@@ -50,9 +50,11 @@
           >
         </div>
       </div>
+      <hr />
 
       <div class="row mt-2">
-        <div class="col">Delivery To: #402, ABC XYZ</div>
+        <div class="col-lg-3">Delivery To:</div>
+        <div class="col-lg-9 text-lg-right">{{ address || '(not set)' }}</div>
       </div>
     </div>
   </div>
@@ -60,12 +62,23 @@
 
 <script>
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 
 export default {
-  // props: ['items', 'cart'],
   computed: {
+    ...mapState('cart', ['isGift', 'deliveryLocation', 'giftRecipient']),
     ...mapGetters('cart', ['cart', 'items']),
+    address() {
+      let address = false;
+
+      if (this.isGift && this.giftRecipient) {
+        address = this.giftRecipient.address;
+      } else if (!this.isGift && this.deliveryLocation) {
+        address = this.deliveryLocation.address;
+      }
+
+      return address;
+    },
   },
 };
 </script>
