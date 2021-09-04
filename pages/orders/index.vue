@@ -29,6 +29,7 @@
 <script>
 export default {
   layout: 'navigationOnly',
+  middleware: ['authenticated'],
   async asyncData({ $axios, store }) {
     store.commit('setNavigationTitle', 'Order History');
     const { data } = await $axios.get('/orders');

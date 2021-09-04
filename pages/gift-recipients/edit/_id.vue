@@ -9,6 +9,7 @@
 import { mapState } from 'vuex';
 
 export default {
+  middleware: ['authenticated'],
   computed: {
     ...mapState(['countries']),
   },

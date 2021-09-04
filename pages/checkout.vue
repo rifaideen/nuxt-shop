@@ -113,11 +113,11 @@ import { mapState, mapActions } from 'vuex';
 export default {
   name: 'CheckoutPage',
   layout: 'navigationOnly',
-  middleware({ store, redirect }) {
+  middleware: ['authenticated', ({ store, redirect }) => {
     if (!store.getters['cart/hasItems']) {
       redirect('/basket');
     }
-  },
+  }],
   async asyncData({ store }) {
     store.commit('setNavigationTitle', 'Checkout');
     await store.dispatch('cart/get');

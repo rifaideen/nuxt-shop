@@ -10,6 +10,7 @@ import { mapState } from 'vuex';
 
 export default {
   layout: 'navigationOnly',
+  middleware: ['authenticated'],
   computed: {
     ...mapState(['countries']),
   },

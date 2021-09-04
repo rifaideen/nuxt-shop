@@ -40,6 +40,7 @@
 <script>
 export default {
   layout: 'navigationOnly',
+  middleware: ['authenticated'],
   async asyncData({
     $axios, store, params, error,
   }) {
