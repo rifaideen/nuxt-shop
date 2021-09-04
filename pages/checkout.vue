@@ -44,6 +44,7 @@
               cols="30"
               rows="3"
               placeholder="Write your personalized wish here"
+              v-model="notes"
             ></textarea>
           </div>
         </div>
@@ -54,16 +55,34 @@
       <div class="row m-4 mt-4">
         <div class="col-12">
           <div class="form-group mt-2">
-            <input type="checkbox" name="" id="" />
+            <input type="checkbox" v-model="preferedDelivery" />
             <label class="orange-color">
               Do you have any preferred date and time for delivery.
             </label>
           </div>
         </div>
-        <div class="col-12 mb-2">
+        <div class="col-12 mb-2" v-if="preferedDelivery">
           <div class="row">
-            <div class="col-6">Date</div>
-            <div class="col-6">Time</div>
+            <div class="col-6">
+              <b-form-datepicker
+                id="example-datepicker"
+                v-model="preferred_delivery_date"
+                type="text"
+                class="mb-2"
+                placeholder="Date"
+                :min="minDate"
+              >
+              </b-form-datepicker>
+            </div>
+            <div class="col-6">
+              <select v-model="preferred_delivery_time" class="form-control">
+                <option value="">Time</option>
+                <option>9 AM to 12 PM</option>
+                <option>12 PM to 3 PM</option>
+                <option>3 PM to 6 PM</option>
+                <option>6 AM to 9 PM</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
@@ -78,7 +97,7 @@
     <div class="fixed-bottom">
       <div class="row">
         <div class="col-10 offset-1 text-center">
-          <button class="btn btn-block orange-bg text-uppercase">
+          <button class="btn btn-block orange-bg text-uppercase" @click="checkout">
             Proceed to payment
           </button>
         </div>
@@ -107,6 +126,10 @@ export default {
     return {
       cart: store.getters['cart/cart'],
       items: store.getters['cart/items'],
+      preferedDelivery: false,
+      preferred_delivery_date: null,
+      preferred_delivery_time: '',
+      notes: '',
     };
   },
   computed: {
@@ -132,6 +155,60 @@ export default {
         select: '/gift-recipients?a=select',
         new: '/gift-recipients/new?a=select',
       };
+    },
+    minDate() {
+      const date = new Date();
+      date.setDate(date.getDate() + 1);
+
+      return date;
+    },
+  },
+  methods: {
+    checkout() {
+      if (this.validate()) {
+        // prepare payload
+        const payload = {
+          preferred_delivery_date: this.preferred_delivery_date,
+          preferred_delivery_time: this.preferred_delivery_time,
+          notes: this.notes,
+          payment_info: { payment_ref: '#1234', status: 'success' },
+        };
+
+        if (this.isGiftCheckout) {
+          payload.gift_recipient_id = this.giftRecipient.id;
+        } else {
+          payload.delivery_location_id = this.deliveryLocation.id;
+        }
+
+        // call the payment gateway and hit the checkout api
+      }
+    },
+    validate() {
+      let hasError = false;
+      let message = null;
+
+      if (this.isGiftCheckout && !this.giftRecipient) {
+        message = 'Please select gift recipient.';
+        hasError = true;
+      } else if (!this.isGiftCheckout && !this.deliveryLocation) {
+        message = 'Please select delivery location.';
+        hasError = true;
+      }
+
+      if (!hasError && this.preferedDelivery) {
+        if (!this.preferred_delivery_date || !this.preferred_delivery_time) {
+          message = 'Please fill preferred delivery date and time.';
+          hasError = true;
+        }
+      }
+
+      if (hasError) {
+        this.$toast('danger', 'Error', message);
+      } else {
+        this.$toast('success', 'Success', 'Form Valid');
+      }
+
+      return !hasError;
     },
   },
 };
