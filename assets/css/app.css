@@ -154,3 +154,16 @@ button.btn-logout {
 .delivery-location .title {
     color: #f85806;
 }
+
+.order-history {
+    color: #564227;
+    background: #efe9dd;
+}
+
+.order-history b {
+    color: #af9352;
+}
+
+.order-history .title {
+    color: #f85806;
+}
