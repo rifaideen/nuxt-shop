@@ -44,30 +44,38 @@
           <!-- Menu 1 -->
           <div class="row mb-5">
             <div class="col-12 mb-2">
-              <i class="fa fa-shopping-basket"></i> Basket
+              <nuxt-link to="/basket">
+                <i class="fa fa-shopping-basket"></i> Basket
+              </nuxt-link>
             </div>
             <div class="col-12 mb-2">
-              <i class="fa fa-history"></i>
-              Order History
+              <nuxt-link to="/orders">
+                <i class="fa fa-history"></i> Order History
+              </nuxt-link>
             </div>
             <div class="col-12 mb-2">
-              <i class="fa fa-truck"></i>
-              Track Your Orders
+              <nuxt-link to="/track-orders">
+                <i class="fa fa-truck"></i> Track Your Orders
+              </nuxt-link>
             </div>
             <div class="col-12 mb-2">
-              <i class="fa fa-clock"></i>
-              Saved Items
+              <nuxt-link to="/saved-items">
+                <i class="fa fa-clock"></i> Saved Items
+              </nuxt-link>
             </div>
           </div>
 
           <!-- Menu 2 -->
           <div class="row mb-5" v-if="isAuthenticated">
             <div class="col-12 mb-2">
-              <i class="fa fa-globe-asia"></i> Delivery Locations
+              <nuxt-link to="/delivery-locations">
+                <i class="fa fa-globe-asia"></i> Delivery Locations
+              </nuxt-link>
             </div>
             <div class="col-12 mb-2">
-              <i class="fa fa-gifts"></i>
-              Gift Recipients
+              <nuxt-link to="/gift-recipients">
+                <i class="fa fa-gifts"></i> Gift Recipients
+              </nuxt-link>
             </div>
             <div class="col-12 mb-2">
               <nuxt-link to="/account">
@@ -80,11 +88,9 @@
           <!-- Menu 3 -->
           <div class="row mb-3">
             <div class="col-12 mb-2">
-              <i class="fa fa-flag"></i> Country
-            </div>
-            <div class="col-12 mb-2">
-              <i class="fa fa-street-view"></i>
-              City
+              <nuxt-link to="/store-selection">
+                <i class="fa fa-flag"></i> Select Store
+              </nuxt-link>
             </div>
             <div class="col-12 mb-2">
               <i class="fa fa-language"></i>
@@ -95,7 +101,9 @@
           <!-- Menu 4 -->
           <div class="row mb-3">
             <div class="col-12 mb-2">
-              <i class="fa fa-store"></i> Our Boutiques
+              <nuxt-link to="/our-boutiques">
+                <i class="fa fa-store"></i> Our Boutiques
+              </nuxt-link>
             </div>
           </div>
 
