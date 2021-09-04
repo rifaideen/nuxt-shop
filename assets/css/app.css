@@ -141,3 +141,16 @@ button.btn-logout {
 #map-container {
     height: 300px;
 }
+
+.delivery-location {
+    background: #efe9dd;
+    margin-bottom: 20px;
+}
+
+.delivery-location b {
+    color: gray;
+}
+
+.delivery-location .title {
+    color: #f85806;
+}
