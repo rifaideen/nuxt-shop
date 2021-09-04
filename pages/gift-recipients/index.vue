@@ -1,5 +1,11 @@
 <template>
   <div class="mt-4">
+    <nuxt-link to="/gift-recipients/new">
+      <button class="btn btn-danger btn-block text-uppercase mb-4">
+        <i class="fa fa-plus-square"></i>
+        Add A New Gift Recipient
+      </button>
+    </nuxt-link>
     <ListLocation
       v-for="location in deliveryLocations"
       :location="location"
