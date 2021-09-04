@@ -176,17 +176,19 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mapActions, mapState } from 'vuex';
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
-import AutoComplete from 'vue-google-autocomplete';
 
 export default {
   layout: 'nav-only',
   components: {
     ValidationObserver,
     ValidationProvider,
-    AutoComplete,
+    AutoComplete: () => import(/* webpackChunkName: "auto-complete" */ 'vue-google-autocomplete'),
   },
   computed: {
     ...mapState(['countries']),
+    action() {
+      return this.$route.query?.a === 'select' ? 'select' : 'edit';
+    },
   },
   data() {
     return {
@@ -225,9 +227,9 @@ export default {
         };
         this.errors = null;
 
-        const { data } = await this.$axios.post('/delivery-location', payload);
+        const { data } = await this.$axios.post('/delivery-location?expand=country', payload);
         this.$store.commit('cart/setDeliveryLocation', data);
-        this.$router.push('/checkout');
+        this.$router.push(this.action === 'select' ? '/checkout' : '/delivery-locations');
       } catch (error) {
         // handle server validation error
         if (error.isAxiosError && error.response.status === 400 && error.response.data.errors) {
