@@ -32,12 +32,13 @@
 import { mapMutations } from 'vuex';
 
 export default {
-  props: ['location', 'action'],
+  props: ['location', 'action', 'isGiftRecipient'],
   methods: {
     ...mapMutations('cart', ['setDeliveryLocation']),
     navigate() {
       if (this.action === 'edit') {
-        this.$router.push(`/delivery-locations/edit/${this.location.id}`);
+        const route = this.isGiftRecipient ? 'gift-recipient' : 'delivery-locations';
+        this.$router.push(`/${route}/edit/${this.location.id}`);
       } else {
         this.setDeliveryLocation(this.location);
         this.$router.push('/checkout');
