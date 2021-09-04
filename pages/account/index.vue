@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  layout: 'nav-only',
+  layout: 'navigationOnly',
   middleware: ['store-selection'],
   asyncData({ store }) {
     store.commit('setNavigationTitle', 'Account');

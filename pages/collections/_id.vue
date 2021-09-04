@@ -26,7 +26,7 @@ import dynamicItem from '~/mixins/dynamic-item';
 export default {
   name: 'Collection-Details',
   middleware: ['store-selection'],
-  layout: 'nav-only',
+  layout: 'navigationOnly',
   mixins: [dynamicItem],
   data() {
     return {

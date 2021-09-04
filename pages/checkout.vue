@@ -145,7 +145,7 @@ import { mapState } from 'vuex';
 
 export default {
   name: 'CheckoutPage',
-  layout: 'nav-only',
+  layout: 'navigationOnly',
   middleware({ store, redirect }) {
     if (!store.getters['cart/hasItems']) {
       redirect('/basket');

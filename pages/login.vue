@@ -64,7 +64,7 @@ import { mapActions } from 'vuex';
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
 
 export default {
-  layout: 'nav-only',
+  layout: 'navigationOnly',
   middleware({ store, redirect }) {
     if (store.getters['auth/isAuthenticated']) {
       redirect('/');

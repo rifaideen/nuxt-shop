@@ -81,7 +81,7 @@
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
 
 export default {
-  layout: 'nav-only',
+  layout: 'navigationOnly',
   components: {
     ValidationObserver,
     ValidationProvider,

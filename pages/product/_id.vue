@@ -29,7 +29,7 @@
 <script>
 export default {
   middleware: ['store-selection'],
-  layout: 'nav-only',
+  layout: 'navigationOnly',
   async asyncData({
     $axios, params, store, error,
   }) {

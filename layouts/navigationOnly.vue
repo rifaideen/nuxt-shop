@@ -8,6 +8,12 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'NavigationOnlyLayout',
+};
+</script>
+
 <style scoped>
 
 </style>

@@ -45,7 +45,7 @@
 export default {
   name: 'Packed-Ready',
   middleware: ['store-selection'],
-  layout: 'nav-only',
+  layout: 'navigationOnly',
   head() {
     return {
       title: 'Packed & Ready Collections',
