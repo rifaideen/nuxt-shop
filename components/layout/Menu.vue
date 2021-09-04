@@ -4,19 +4,19 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="d-flex m-auto text-center">
           <b-nav-item to="/">
-            <b><i class="fa fa-fan fa-1x"></i> Home</b>
+            <b><i class="fa fa-fan fa-2x"></i><br/> Home</b>
           </b-nav-item>
           <b-nav-item to="/collections">
-            <b><i class="fa fa-cookie fa-1x"></i> Collections</b>
+            <b><i class="fa fa-cookie fa-2x"></i><br/> Collections</b>
           </b-nav-item>
           <b-nav-item to="/create-box">
-            <b><i class="fa fa-box fa-1x"></i> Create Box</b>
+            <b><i class="fa fa-box-open fa-2x"></i><br/> Create Box</b>
           </b-nav-item>
           <b-nav-item to="/event-request">
-            <b><i class="fa fa-box-open fa-1x"></i> Events</b>
+            <b><i class="fa fa-birthday-cake fa-2x"></i><br/> Events</b>
           </b-nav-item>
           <b-nav-item to="/basket">
-            <b><i class="fa fa-shopping-basket fa-1x"></i> Basket</b>
+            <b><i class="fa fa-shopping-basket fa-2x"></i><br/> Basket</b>
           </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
