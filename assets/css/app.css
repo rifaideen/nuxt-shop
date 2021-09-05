@@ -155,7 +155,7 @@ button.btn-logout {
     color: #f85806;
 }
 
-.order-history {
+.order-history, .notification-container {
     color: #564227;
     background: #efe9dd;
 }
