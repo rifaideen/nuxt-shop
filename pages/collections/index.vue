@@ -9,7 +9,7 @@
         has-actions
       />
       <!-- For Your Events: product listing -->
-      <div class="container mb-2">
+      <div class="container mt-4 mb-2">
         <GridItemsRow
           title="For Your Events"
           :items="eventCollections"
