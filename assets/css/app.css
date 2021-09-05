@@ -167,3 +167,7 @@ button.btn-logout {
 .order-history .title {
     color: #f85806;
 }
+
+.carousel-indicators .active {
+    background-color: #f85806;
+}
