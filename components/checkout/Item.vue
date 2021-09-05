@@ -4,7 +4,7 @@
       <img :src="item.image" :alt="item.title" class="rounded-lg img-fluid" />
     </div>
     <div class="col-lg-9 col-sm-8">
-      <b>{{ item.title }}</b>
+      <b>{{ item.title || item.name }}</b>
       <p>{{ item.description }}</p>
     </div>
     <div class="col-lg-4 offset-lg-8">

@@ -2,7 +2,7 @@
   <div>
     <ProductCarousel :items="product.images" image-key-attribute="original" />
 
-    <div class="row product-container shadow mt-5 mb-2">
+    <div class="row product-container shadow mt-5 mb-4">
       <div class="col-12 mt-2 text-right">
         <FavouriteComponent
           :product-id="product.id"
@@ -19,7 +19,7 @@
 
     <GridItemsRow
       :items="related"
-      see-all-link="/related-items"
+      :see-all-link="`/related-items/${product.id}`"
       base-url="product"
     >
       Related Items
