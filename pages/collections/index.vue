@@ -15,6 +15,7 @@
           :items="eventCollections"
           see-all-link="/collections"
           base-url="collections"
+          :has-favourites="false"
         />
       </div>
 
@@ -22,11 +23,11 @@
       <div class="container mb-2">
         <div class="row">
           <div class="col">
-            <h2>Our Collections</h2>
+            <h2>Explore Our Packed Collections</h2>
           </div>
         </div>
         <div
-          class="row product-container shadow rounded-lg mb-3"
+          class="row p-4 product-container shadow rounded-lg mb-3"
           v-for="collection in ourCollections"
           :key="collection.id"
         >
@@ -39,7 +40,7 @@
           </div>
           <div class="col-8">
             <nuxt-link :to="`/collections/${collection.id}`">
-              <div class="row">
+              <div class="row mb-4">
                 <div class="col-11">
                   <b>{{ collection.title }}</b>
                 </div>
@@ -57,16 +58,6 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- Explore Our Packed Collections: product listing -->
-      <div class="container mb-2">
-        <GridItemsRow
-          title="Explore Our Packed Collections"
-          :items="packedCollections"
-          see-all-link="/packed-and-ready"
-          base-url="collections"
-        />
       </div>
     </template>
     <div v-else-if="$fetchState.error">
@@ -88,8 +79,7 @@ export default {
     ...mapGetters('collections', {
       productSliders: 'sliders',
       eventCollections: 'events',
-      ourCollections: 'normal',
-      packedCollections: 'boxes',
+      ourCollections: 'mixed',
     }),
   },
   async fetch() {

@@ -1,7 +1,10 @@
 <template>
   <div class="row product-container shadow mb-4">
-    <div class="col-12 text-success text-right">
-      <i class="fa fa-star"></i>
+    <div class="col-12 text-right">
+      <FavouriteComponent
+        :product-id="product.id"
+        :is-favourite="product.is_favourite"
+      />
     </div>
     <div class="col-lg-3 col-sm-4">
       <img

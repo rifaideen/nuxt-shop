@@ -40,6 +40,7 @@
         see-all-link="/packed-and-ready"
         id-attribute="collection_id"
         base-url="product"
+        :has-favourites="false"
       />
     </div>
   </div>

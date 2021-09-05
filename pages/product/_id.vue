@@ -3,8 +3,11 @@
     <ProductCarousel :items="product.images" image-key-attribute="original" />
 
     <div class="row product-container shadow mt-5 mb-2">
-      <div class="col-12 mt-2 text-right" :class="favouriteClass">
-        <i class="fa fa-star"></i>
+      <div class="col-12 mt-2 text-right">
+        <FavouriteComponent
+          :product-id="product.id"
+          :is-favourite="product.is_favourite"
+        />
       </div>
       <div class="col-12">
         <b class="orange-color">{{ product.title }}</b>
