@@ -13,7 +13,7 @@
         <GridItemsRow
           title="For Your Events"
           :items="eventCollections"
-          see-all-link="/collections"
+          see-all-link="/events-collections"
           base-url="collections"
           :has-favourites="false"
         />
