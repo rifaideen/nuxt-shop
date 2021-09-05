@@ -32,3 +32,8 @@ extend('required', {
 extend('string', {
   validate: (value) => /^[a-zA-Z0-9\s,+-]+$/.test(value),
 });
+
+extend('confirmation_required', {
+  validate: (value) => value === true,
+  message: 'Please confirm {_field_}.',
+});
