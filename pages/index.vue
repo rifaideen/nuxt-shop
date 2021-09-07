@@ -22,7 +22,7 @@
       <GridItemsRow
         title="Your Recently Ordered"
         :items="recentOrders"
-        see-all-link="/orders"
+        see-all-link="/recent-orders"
         base-url="product"
         id-attribute="product_id"
         :has-favourites="false"

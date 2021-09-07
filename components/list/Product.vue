@@ -1,8 +1,8 @@
 <template>
   <div class="row product-container shadow mb-4">
-    <div class="col-12 text-right">
+    <div class="col-12 text-right" v-if="hasFavourite">
       <FavouriteComponent
-        :product-id="product.id"
+        :product-id="product[idAttribute]"
         :is-favourite="product.is_favourite"
       />
     </div>
@@ -14,7 +14,7 @@
       />
     </div>
     <div class="col-lg-9 col-sm-8">
-      <nuxt-link :to="`/product/${product.id}`">
+      <nuxt-link :to="`/product/${product[idAttribute]}`">
         <b>{{ product.title }}</b>
       </nuxt-link>
       <p>{{ product.description }}</p>
@@ -69,7 +69,7 @@ export default {
   middleware: ['store-selection'],
   data() {
     // get the cart item for the current product. If any.
-    const item = this.$store.getters['cart/getItemByProductId'](this.product.id);
+    const item = this.$store.getters['cart/getItemByProductId'](this.product[this.idAttribute]);
 
     return {
       item,
@@ -81,6 +81,14 @@ export default {
       type: Object,
       required: true,
     },
+    idAttribute: {
+      type: String,
+      default: 'id',
+    },
+    hasFavourite: {
+      type: Boolean,
+      default: true,
+    },
   },
   computed: {
     itemQuantity() {
@@ -91,7 +99,7 @@ export default {
     refresh() {
       // set updated item
       this.$nextTick(function () {
-        this.item = this.$store.getters['cart/getItemByProductId'](this.product.id);
+        this.item = this.$store.getters['cart/getItemByProductId'](this.product[this.idAttribute]);
       });
     },
   },
