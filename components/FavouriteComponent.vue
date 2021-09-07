@@ -65,6 +65,11 @@ export default {
       }
     }, 1000),
   },
+  watch: {
+    isFavourite(value) {
+      this.favourite = value;
+    },
+  },
 };
 </script>
 
