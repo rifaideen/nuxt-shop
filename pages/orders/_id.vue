@@ -45,8 +45,8 @@ export default {
     $axios, store, params, error,
   }) {
     try {
-      store.commit('setNavigationTitle', 'Order History');
       const { data } = await $axios.get(`/order/${params.id}`);
+      store.commit('setNavigationTitle', `Order #${data.data.order.tracking_code}`);
 
       return {
         order: data.data,
