@@ -27,7 +27,7 @@ export const getters = {
     return state.data['recent-orders'];
   },
   favorites(state) {
-    return state.favorites;
+    return state.data.favorites;
   },
 };
 
