@@ -12,7 +12,10 @@
     </div>
     <div class="row">
       <div class="col-4 mb-2" v-for="item in items" :key="item[idAttribute]">
-        <b-card class="best-seller" :img-src="item[imageAttribute]">
+        <b-card
+          class="best-seller"
+          :img-src="thumbnail(item)"
+        >
           <b-card-title>
             <div class="row">
               <div class="col-10">
@@ -21,10 +24,12 @@
                 </nuxt-link>
               </div>
               <div class="col-2" v-if="hasFavourites">
-                <FavouriteComponent
-                  :product-id="item[idAttribute]"
-                  :is-favourite="item.is_favourite"
-                />
+                <slot name="favourite" :item="item">
+                  <FavouriteComponent
+                    :product-id="item[idAttribute]"
+                    :is-favourite="item.is_favourite"
+                  />
+                </slot>
               </div>
             </div>
           </b-card-title>
@@ -69,6 +74,17 @@ export default {
     hasFavourites: {
       type: Boolean,
       default: true,
+    },
+    hasThumbnailObject: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  methods: {
+    thumbnail(item) {
+      const { hasThumbnailObject, imageAttribute } = this;
+
+      return hasThumbnailObject ? item.thumbnail[imageAttribute] : item[imageAttribute];
     },
   },
 };
