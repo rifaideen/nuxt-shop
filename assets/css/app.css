@@ -171,3 +171,7 @@ button.btn-logout {
 .carousel-indicators .active {
     background-color: #f85806;
 }
+
+.invalid-feedback {
+  display: block;
+}
