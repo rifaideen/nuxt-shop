@@ -174,6 +174,7 @@ export default {
           this.$toast('error', 'Error', data.message);
         }
         this.forget();
+        this.$nuxt.refresh();
       } catch (error) {
         this.$nuxt.error(error);
       }
