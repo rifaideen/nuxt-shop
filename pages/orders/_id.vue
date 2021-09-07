@@ -29,7 +29,7 @@
               Quantity: <b>{{ product.quantity }} {{ product.unit }}</b>
             </div>
             <div class="col-12 mb-2">
-              Price: <b>{{ product.price }}</b>
+              Price: <b>{{ product.price }} {{ order.order.currency }}</b>
             </div>
           </div>
         </div>
