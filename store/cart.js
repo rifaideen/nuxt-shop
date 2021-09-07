@@ -144,5 +144,6 @@ export const actions = {
   },
   async clearCart({ commit }) {
     commit('setId', null);
+    commit('setData', null);
   }
 };

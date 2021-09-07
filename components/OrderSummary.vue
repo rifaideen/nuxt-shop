@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded light-bg-container order-summary mb-4">
+  <div class="rounded light-bg-container order-summary mb-4" v-if="cart">
     <div class="p-4">
       <div class="row mb-2">
         <div class="col-6">

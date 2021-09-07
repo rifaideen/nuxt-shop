@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row m-4" v-if="items.length === 0">
+    <div class="row m-4" v-if="items && items.length === 0">
       <div class="col text-center">
         <b>Your Basket is empty!</b>
         <div class="m-4">
