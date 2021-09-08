@@ -99,20 +99,19 @@ export default {
     },
     async saveItem() {
       // check if the user is authenticated
-      if (true) {
+      if (!this.$store.getters['auth/isAuthenticated']) {
         this.$toast('info', 'Info', 'Please login to perform this action.');
+
         return;
       }
 
       try {
-        const { item } = this;
-        const id = item.product_id || item.customized_product_id;
-        const { data } = await this.saveForLater(id);
+        const { data } = await this.saveForLater(this.item.id);
 
         // reset item status
         if (data && data.success) {
           this.$toast('success', 'Success', data.message);
-          this.$emit('item-saved-for-later');
+          setTimeout(() => this.$emit('item-saved-for-later'), 1500);
         } else {
           this.$toast('danger', 'Note', 'Unbale to save item');
         }
