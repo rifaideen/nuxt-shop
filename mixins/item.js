@@ -3,7 +3,10 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   methods: {
-    ...mapActions('cart', ['create', 'add', 'removeItem', 'saveForLater']),
+    ...mapActions('cart', [
+      'create', 'add', 'updateCustomProduct',
+      'removeItem', 'removeCustomItem', 'saveForLater',
+    ]),
     increaseQuantity() {
       const { unit_slug: unit } = this.item;
       const isKg = (['kg', 'kilogram'].indexOf(unit) > -1);
@@ -39,14 +42,25 @@ export default {
       }
 
       try {
-        const { data } = await this.add({
-          product_id: item.product_id,
-          quantity,
-        });
+        let response = null;
 
-        if (data.success) {
+        // handle different product type
+        if (item.product_type !== 'product') {
+          response = await this.updateCustomProduct({
+            customized_product_id: item.customized_product_id,
+            quantity,
+            price: item.price * item.quantity,
+          });
+        } else {
+          response = await this.add({
+            product_id: item.product_id,
+            quantity,
+          });
+        }
+
+        if (response.data.success) {
           this.isNew = false;
-          this.$toast('success', 'Success', data.message);
+          this.$toast('success', 'Success', response.data.message);
           this.$emit('item-updated');
         }
       } catch (error) {
@@ -84,7 +98,10 @@ export default {
     async removeFromCart() {
       try {
         const { item } = this;
-        const { data } = await this.removeItem(item.product_id);
+        // handle product and custom product deletion
+        const { data } = item.product_id
+          ? await this.removeItem(item.product_id)
+          : await this.removeCustomItem(item.id);
 
         // reset item status
         if (data && data.success) {

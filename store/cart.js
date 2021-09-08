@@ -113,6 +113,17 @@ export const actions = {
 
     return this.$axios.post('/add-to-cart', data);
   },
+  // update customized product in cart
+  updateCustomProduct({ state, rootState }, payload) {
+    const data = {
+      cart_id: state.id,
+      device_id: rootState.device_id,
+      ...payload,
+    };
+
+    return this.$axios.post('/update-custom-product-in-cart', data);
+  },
+  // update-custom-product-in-cart
   // view individual cart item by product id
   viewItem({ state, rootState }, productId) {
     const data = {
@@ -132,6 +143,16 @@ export const actions = {
     };
 
     return this.$axios.delete('/remove-from-cart', { data });
+  },
+  // remove custom product from cart
+  removeCustomItem({ state, rootState }, id) {
+    const data = {
+      device_id: rootState.device_id,
+      cart_id: state.id,
+      item_id: id,
+    };
+
+    return this.$axios.delete('/remove-custom-product-from-cart', { data });
   },
   // remove saved item
   removeSavedItem(context, id) {
