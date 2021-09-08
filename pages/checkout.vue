@@ -9,7 +9,10 @@
           </template>
           <template v-if="isGiftCheckout && giftRecipient">
             <b class="orange-color">Recipient Details:</b>
-            <CheckoutDeliveryComponent :is-gift-recipient="true" :location="giftRecipient" />
+            <CheckoutDeliveryComponent
+              :is-gift-recipient="true"
+              :location="giftRecipient"
+            />
           </template>
         </div>
         <div class="col-12 mb-4">
@@ -94,10 +97,17 @@
     <!-- Review Order -->
     <ReviewOrder />
 
+    <div class="mt-4 rounded light-bg-container">
+      <!-- <CheckoutPaymentForm class="p-4" /> -->
+    </div>
+
     <div class="fixed-bottom">
       <div class="row">
         <div class="col-10 offset-1 text-center">
-          <button class="btn btn-block orange-bg text-uppercase" @click="checkout">
+          <button
+            class="btn btn-block orange-bg text-uppercase"
+            @click="checkout"
+          >
             Proceed to payment
           </button>
         </div>
@@ -167,6 +177,12 @@ export default {
     ...mapActions('cart', ['clearCart']),
     async checkout() {
       if (this.validate()) {
+        // @todo check stripe. The stripe asks us to create account.
+        // const { data } = await this.$axios.post('/create-checkout', {
+        //   amount: this.cart.total_amount,
+        //   currency_code: this.cart.payment_currency,
+        //   orders: this.items,
+        // });
         // prepare payload
         const payload = {
           notes: this.notes,
@@ -230,4 +246,7 @@ export default {
 </script>
 
 <style scoped>
+.stripe-form-container {
+  background: #efe9dd;
+}
 </style>
