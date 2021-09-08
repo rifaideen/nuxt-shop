@@ -48,7 +48,7 @@
                 <i class="fa fa-shopping-basket"></i> Basket
               </nuxt-link>
             </div>
-            <div class="col-12 mb-2">
+            <div class="col-12 mb-2" v-if="isAuthenticated">
               <nuxt-link to="/orders">
                 <i class="fa fa-history"></i> Order History
               </nuxt-link>
@@ -58,7 +58,7 @@
                 <i class="fa fa-truck"></i> Track Your Orders
               </nuxt-link>
             </div>
-            <div class="col-12 mb-2">
+            <div class="col-12 mb-2" v-if="isAuthenticated">
               <nuxt-link to="/saved-items">
                 <i class="fa fa-clock"></i> Saved Items
               </nuxt-link>

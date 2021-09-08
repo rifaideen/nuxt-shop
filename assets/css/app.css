@@ -43,7 +43,7 @@ a {
 }
 
 .brand-sidebar-footer {
-    background: #fafafa;
+    background:#efe9dd;
     color: #af9351;
 }
 
@@ -174,4 +174,17 @@ button.btn-logout {
 
 .invalid-feedback {
   display: block;
+}
+
+.brand-sidebar-menu {
+    color: #af9352;
+    font-size: 18px;
+}
+
+.brand-sidebar-menu a {
+    color: #af9352;
+}
+
+.form-control {
+  border-color: #51422e;
 }
