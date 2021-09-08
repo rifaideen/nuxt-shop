@@ -20,46 +20,48 @@
       <p>{{ product.description }}</p>
     </div>
     <div class="col-12">
-      <div class="row mb-2">
-        <div class="col-lg-9 col-sm-12" :class="{ 'text-info': item }">
-          <b>
-            {{ product.price }} {{ product.currency }} / {{ product.unit }}
-          </b>
-        </div>
-        <div class="col-lg-3 text-center col-sm-12">
-          <button
-            class="btn btn-primary add-to-cart-btn"
-            v-if="!item"
+      <slot name="price-and-controls" :product="product">
+        <div class="row mb-2">
+          <div class="col-lg-9 col-sm-12" :class="{ 'text-info': item }">
+            <b>
+              {{ product.price }} {{ product.currency }} / {{ product.unit }}
+            </b>
+          </div>
+          <div class="col-lg-3 text-center col-sm-12">
+            <button
+              class="btn btn-primary add-to-cart-btn"
+              v-if="!item"
 
-            @click="$emit('add-to-basket', product)"
-          >
-            <i class="fa fa-plus-circle"></i> Add to Basket
-          </button>
-          <div v-else>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <button class="btn btn-sm golden-bg" @click="$emit('decrease-quantity', item)">
-                  <i class="fa fa-minus-circle"></i>
-                </button>
-              </div>
-              <input
-                type="text"
-                class="form-control text-center"
-                disabled
-                :value="itemQuantity + ' ' + item.unit"
-              />
-              <div class="input-group-append">
-                <button
-                  class="btn btn-sm golden-bg rounded-right"
-                  @click="$emit('increase-quantity', item)"
-                >
-                  <i class="fa fa-plus-circle"></i>
-                </button>
+              @click="$emit('add-to-basket', product)"
+            >
+              <i class="fa fa-plus-circle"></i> Add to Basket
+            </button>
+            <div v-else>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <button class="btn btn-sm golden-bg" @click="$emit('decrease-quantity', item)">
+                    <i class="fa fa-minus-circle"></i>
+                  </button>
+                </div>
+                <input
+                  type="text"
+                  class="form-control text-center"
+                  disabled
+                  :value="itemQuantity + ' ' + item.unit"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-sm golden-bg rounded-right"
+                    @click="$emit('increase-quantity', item)"
+                  >
+                    <i class="fa fa-plus-circle"></i>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </slot>
     </div>
   </div>
 </template>

@@ -133,9 +133,17 @@ export const actions = {
 
     return this.$axios.delete('/remove-from-cart', { data });
   },
+  // remove saved item
+  removeSavedItem(context, id) {
+    return this.$axios.delete(`/remove-saved-item/${id}`);
+  },
   // save cart item for later retrieval
   saveForLater(context, id) {
     return this.$axios.post(`/save-for-later/${id}`);
+  },
+  // move saved item to cart
+  moveToCart(context, { item, cart }) {
+    return this.$axios.post(`/move-to-cart/${item}/${cart}`);
   },
   // get best sellers
   async getBestSellers({ commit, getters, rootState }) {
