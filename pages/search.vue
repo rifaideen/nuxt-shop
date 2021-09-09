@@ -27,12 +27,13 @@
     <div class="mt-2 p-4" v-if="products.length > 0">
       <ListProduct
         :product="product"
-        v-for="product in products"
+        v-for="(product, i) in products"
         :key="product.id"
         @add-to-basket="onAddToBasket"
         @increase-quantity="onIncreaseQuantity"
         @decrease-quantity="onDecreaseQuantity"
         :ref="`ListProduct-${product.id}`"
+        v-observe-visibility="i === products.length - 1 ? loadMore : false"
       />
       <CartControls
         :item="selectedItem"
@@ -42,6 +43,10 @@
         @item-deleted="onItemUpdated"
         :key="'selected-item-' + selectedItem.product_id"
       />
+    </div>
+
+    <div class="mt-2 p-4" v-if="loadingMore || searching">
+      <ListPlaceholder />
     </div>
 
     <div class="mt-2" v-if="didSearch && products.length < 1">
@@ -68,6 +73,8 @@ export default {
       links: [],
       error: null,
       didSearch: false,
+      searching: false,
+      loadingMore: false,
     };
   },
   asyncData({ store }) {
@@ -86,7 +93,11 @@ export default {
         return;
       }
 
+      this.$nuxt.$loading.start();
       this.error = null;
+      this.searching = true;
+      this.products = [];
+      this.links = [];
       const storeID = this.$store.state.store.id;
       const { data } = await this.$axios.get(`/search/${storeID}`, {
         params: { keyword: this.keyword },
@@ -95,6 +106,24 @@ export default {
       this.products = data.data;
       this.links = data.links;
       this.didSearch = true;
+      this.searching = false;
+      this.$nuxt.$loading.finish();
+    },
+    async loadMore(visible) {
+      if (!visible) {
+        return;
+      }
+
+      // eslint-disable-next-line no-prototype-builtins
+      if (this.links.hasOwnProperty('next')) {
+        this.$nuxt.$loading.start();
+        this.loadingMore = true;
+        const { data } = await this.$axios.get(this.links.next);
+        this.products = this.products.concat(data.data);
+        this.links = data.links;
+        this.loadingMore = false;
+        this.$nuxt.$loading.finish();
+      }
     },
   },
 };
