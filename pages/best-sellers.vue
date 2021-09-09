@@ -8,12 +8,13 @@
 
     <ListProduct
       :product="product"
-      v-for="product in products"
+      v-for="(product, i) in products"
       :key="product.id"
       @add-to-basket="onAddToBasket"
       @increase-quantity="onIncreaseQuantity"
       @decrease-quantity="onDecreaseQuantity"
       :ref="`ListProduct-${product.id}`"
+      v-observe-visibility="i === products.length - 1 ? loadMore : false"
     />
     <CartControls
       :item="selectedItem"
@@ -23,6 +24,9 @@
       @item-deleted="onItemUpdated"
       :key="'selected-item-' + selectedItem.product_id"
     />
+    <div v-if="$fetchState.pending">
+      <ListPlaceholder />
+    </div>
   </div>
 </template>
 
@@ -38,6 +42,7 @@ export default {
     return {
       selectedItem: null,
       existingItem: false,
+      lastItemVisible: false,
     };
   },
   // eslint-disable-next-line consistent-return
@@ -62,6 +67,25 @@ export default {
     } catch (e) {
       return error(e);
     }
+  },
+  async fetch() {
+    if (this.lastItemVisible) {
+      // eslint-disable-next-line no-prototype-builtins
+      if (this.links.hasOwnProperty('next')) {
+        const { data } = await this.$axios.get(this.links.next);
+        this.products = this.products.concat(data.data);
+        this.links = data.links;
+      }
+    }
+  },
+  methods: {
+    async loadMore(visible) {
+      this.lastItemVisible = visible;
+
+      if (visible) {
+        this.$fetch();
+      }
+    },
   },
 };
 </script>
