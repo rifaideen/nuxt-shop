@@ -27,6 +27,8 @@ export default {
     '~/plugins/utilities',
     '~/plugins/vee-validate',
     '~/plugins/axios',
+    '~/plugins/observe-visibility.client',
+    '~/plugins/vue-placeholders',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
