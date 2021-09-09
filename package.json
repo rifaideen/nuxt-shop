@@ -19,7 +19,9 @@
     "nuxt": "^2.15.7",
     "nuxt-stripe-module": "^3.2.0",
     "vee-validate": "^3.4.12",
-    "vue-google-autocomplete": "^1.1.2"
+    "vue-content-placeholders": "^0.2.1",
+    "vue-google-autocomplete": "^1.1.2",
+    "vue-observe-visibility": "^1.0.0"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
