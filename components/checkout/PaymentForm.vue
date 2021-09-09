@@ -38,6 +38,17 @@
 import { mapGetters } from 'vuex';
 
 export default {
+  head() {
+    return {
+      script: [
+        {
+          hid: 'stripe',
+          src: 'https://js.stripe.com/v3/',
+          callback: () => this.init(),
+        },
+      ],
+    };
+  },
   props: {
     clientSecret: {
       type: String,
@@ -46,6 +57,7 @@ export default {
   },
   data() {
     return {
+      $stripe: null,
       error: null,
       card: null,
       submitting: false,
@@ -54,49 +66,56 @@ export default {
   computed: {
     ...mapGetters('auth', ['user']),
   },
-  mounted() {
-    if (this.$stripe) {
-      const elements = this.$stripe.elements();
-      const card = elements.create('card', {
-        style: {
-          base: {
-            iconColor: '#c4f0ff',
-            color: '#141414',
-            fontWeight: '500',
-            fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
-            fontSize: '16px',
-            fontSmoothing: 'antialiased',
-            ':-webkit-autofill': {
-              color: '#141414',
-            },
-            '::placeholder': {
-              color: '#f85806',
-              fontWeight: 'bold',
-            },
-          },
-          invalid: {
-            iconColor: '#f85806',
-            color: '#f85806',
-          },
-        },
-      });
-      // Add an instance of the card Element into the `card-element` <div>
-      card.mount('#payment-form');
-      // set the card reference to access later.
-      this.card = card;
-
-      // card validation
-      const vm = this;
-      card.on('change', (event) => {
-        if (event.error) {
-          vm.error = event.error.message;
-        } else {
-          vm.error = '';
-        }
-      });
-    }
-  },
   methods: {
+    init() {
+      try {
+        // eslint-disable-next-line no-undef
+        this.$stripe = Stripe(this.$config.stripePublishableKey);
+
+        if (this.$stripe) {
+          const elements = this.$stripe.elements();
+          const card = elements.create('card', {
+            style: {
+              base: {
+                iconColor: '#c4f0ff',
+                color: '#141414',
+                fontWeight: '500',
+                fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
+                fontSize: '16px',
+                fontSmoothing: 'antialiased',
+                ':-webkit-autofill': {
+                  color: '#141414',
+                },
+                '::placeholder': {
+                  color: '#f85806',
+                  fontWeight: 'bold',
+                },
+              },
+              invalid: {
+                iconColor: '#f85806',
+                color: '#f85806',
+              },
+            },
+          });
+          // Add an instance of the card Element into the `card-element` <div>
+          card.mount('#payment-form');
+          // set the card reference to access later.
+          this.card = card;
+
+          // card validation
+          const vm = this;
+          card.on('change', (event) => {
+            if (event.error) {
+              vm.error = event.error.message;
+            } else {
+              vm.error = '';
+            }
+          });
+        }
+      } catch (error) {
+        this.$toast('danger', 'Payment Initialization Error', error.message);
+      }
+    },
     async onSubmit() {
       try {
         this.submitting = true;

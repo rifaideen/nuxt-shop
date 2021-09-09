@@ -47,13 +47,9 @@ export default {
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
     'cookie-universal-nuxt',
-    'nuxt-stripe-module',
   ],
   axios: {
     baseURL: process.env.API_URL,
-  },
-  stripe: {
-    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -63,5 +59,6 @@ export default {
   publicRuntimeConfig: {
     exludeStoreSelection: ['about'],
     googleApiKey: process.env.GOOGLE_API_KEY,
+    stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
   },
 };
