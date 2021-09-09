@@ -72,7 +72,7 @@
 
 <script>
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { mapState, mapActions, mapMutations } from 'vuex';
+import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
 
 export default {
   data() {
@@ -84,12 +84,24 @@ export default {
   },
   computed: {
     ...mapState(['countries', 'cities', 'stores']),
+    ...mapGetters('cart', {
+      cartCreated: 'created',
+    }),
   },
   methods: {
     ...mapMutations(['setCities', 'setStores', 'setStore', 'setCountry', 'setCity']),
     ...mapActions(['getCities', 'getStores']),
-    selectStore(store) {
+    ...mapActions('cart', {
+      deleteCart: 'delete',
+    }),
+    async selectStore(store) {
       this.setStore(store);
+
+      // clear cart before redirect
+      if (this.cartCreated) {
+        await this.deleteCart();
+      }
+
       this.$nuxt.context.redirect('/');
     },
   },
