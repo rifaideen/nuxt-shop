@@ -1,30 +1,58 @@
 <template>
   <div>
-    <div class="row">
-      <div class="col-lg-4 col-sm-6">
-        <b>Enter Card Details:</b>
-      </div>
-      <div class="col-6">
-        <div class="form-group">
-          <div id="payment-form"></div>
+    <form @submit.prevent="onSubmit">
+      <div class="row mb-4">
+        <div class="col-lg-4 col-sm-6">
+          <h4 class=" orange-color">
+            Enter Card Details:
+          </h4>
         </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-lg-6 col-sm-12 offset-lg-4 text-danger">
-        {{ error }}
+      <div class="row">
+        <div class="col-6 mt-2">
+          <div class="form-group">
+            <div id="payment-form"></div>
+          </div>
+        </div>
+        <div class="col-6 text-center">
+          <button
+            type="submit"
+            class="btn btn-outline-danger"
+            :disabled="submitting">Submit Payment
+          </button>
+        </div>
       </div>
-    </div>
+
+      <div class="row">
+        <div class="col-lg-6 col-sm-12 offset-lg-4 text-danger">
+          {{ error }}
+        </div>
+      </div>
+    </form>
   </div>
 </template>
 
 <script>
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { mapGetters } from 'vuex';
+
 export default {
+  props: {
+    clientSecret: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       error: null,
+      card: null,
+      submitting: false,
     };
+  },
+  computed: {
+    ...mapGetters('auth', ['user']),
   },
   mounted() {
     if (this.$stripe) {
@@ -54,19 +82,47 @@ export default {
       });
       // Add an instance of the card Element into the `card-element` <div>
       card.mount('#payment-form');
+      // set the card reference to access later.
+      this.card = card;
+
+      // card validation
       const vm = this;
       card.on('change', (event) => {
         if (event.error) {
           vm.error = event.error.message;
-          console.log(event.error.message);
         } else {
           vm.error = '';
         }
       });
     }
   },
+  methods: {
+    async onSubmit() {
+      try {
+        this.submitting = true;
+        const result = await this.$stripe.confirmCardPayment(this.clientSecret, {
+          payment_method: {
+            card: this.card,
+            billing_details: {
+              name: `${this.user.first_name} ${this.user.last_name}`.trim(),
+            },
+          },
+        });
+
+        if (result.error) {
+          this.error = result.error.message;
+          this.submitting = false;
+        } else if (result.paymentIntent.status === 'succeeded') {
+          this.$emit('payment-success', result.paymentIntent);
+        }
+      } catch (error) {
+        this.$toast('error', 'Payment Error', 'Unable to complete the payment. Make sure the card details are correct.');
+        this.submitting = false;
+      }
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 </style>

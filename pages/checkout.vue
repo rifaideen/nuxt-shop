@@ -97,13 +97,23 @@
     <!-- Review Order -->
     <ReviewOrder />
 
-    <div class="mt-4 rounded light-bg-container">
-      <!-- <CheckoutPaymentForm class="p-4" /> -->
-    </div>
+    <!-- Payment Modal  -->
+    <b-modal id="payment-modal" size="lg" hide-footer no-close-on-backdrop dark>
+      <template #modal-title>
+        Payment Details
+      </template>
+      <div v-if="displayPaymentForm && paymentIntent !== null">
+        <CheckoutPaymentForm
+          class="p-4"
+          :client-secret="paymentIntent.paymentIntent"
+          @payment-success="saveOrder"
+        />
+      </div>
+    </b-modal>
 
     <div class="fixed-bottom">
       <div class="row">
-        <div class="col-10 offset-1 text-center">
+        <div class="col-lg-6 offset-lg-3 text-center">
           <button
             class="btn btn-block orange-bg text-uppercase"
             @click="checkout"
@@ -140,6 +150,8 @@ export default {
       preferred_delivery_date: null,
       preferred_delivery_time: '',
       notes: '',
+      paymentIntent: null,
+      displayPaymentForm: false,
     };
   },
   computed: {
@@ -177,16 +189,28 @@ export default {
     ...mapActions('cart', ['clearCart']),
     async checkout() {
       if (this.validate()) {
-        // @todo check stripe. The stripe asks us to create account.
-        // const { data } = await this.$axios.post('/create-checkout', {
-        //   amount: this.cart.total_amount,
-        //   currency_code: this.cart.payment_currency,
-        //   orders: this.items,
-        // });
+        try {
+          this.$nuxt.$loading.start();
+          const { data } = await this.$axios.post('/payment-sheet', {
+            amount: this.cart.total_amount * 100,
+            currency_code: this.cart.payment_currency,
+          });
+          this.paymentIntent = data;
+          this.displayPaymentForm = true;
+          this.$nuxt.$loading.finish();
+          this.$bvModal.show('payment-modal');
+        } catch (error) {
+          this.$nuxt.$loading.finish();
+          this.$toast('danger', 'Info', 'Sorry! We are unable to process your request.');
+        }
+      }
+    },
+    async saveOrder(paymentInfo) {
+      if (this.validate() && this.paymentIntent !== null) {
         // prepare payload
         const payload = {
           notes: this.notes,
-          payment_info: "{ payment_ref: '#1234', status: 'success' }",
+          payment_info: JSON.stringify(paymentInfo),
         };
 
         if (this.preferedDelivery) {
@@ -207,6 +231,9 @@ export default {
           if (data.success) {
             // clear cart and redirect to order success page.
             this.clearCart();
+            this.$bvModal.hide('payment-modal');
+            this.displayPaymentForm = false;
+            this.paymentIntent = null;
             this.$router.push('/order-placed');
           } else {
             this.$toast('danger', 'error', data.message);
@@ -248,5 +275,9 @@ export default {
 <style scoped>
 .stripe-form-container {
   background: #efe9dd;
+}
+.modal-open .modal {
+  background: black;
+  opacity: 0.9;
 }
 </style>
