@@ -5,6 +5,8 @@
       v-for="item in items"
       :key="item.id"
       :ref="`ListProduct-${item.id}`"
+      :has-favourite="false"
+      title-attribute="name"
     >
       <template v-slot:price-and-controls="{ product }">
         <SavedItemControls

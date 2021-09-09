@@ -1,6 +1,6 @@
 <template>
   <div class="row product-container shadow mb-4">
-    <div class="col-12 text-right" v-if="hasFavourite">
+    <div class="col-12 text-right mt-2" v-if="hasFavourite">
       <FavouriteComponent
         :product-id="product[idAttribute]"
         :is-favourite="product.is_favourite"
@@ -9,15 +9,15 @@
     <div class="col-lg-3 col-sm-4">
       <img
         :src="product.image"
-        :alt="product.title"
+        :alt="product[titleAttribute]"
         class="rounded-lg img-fluid"
       />
     </div>
-    <div class="col-lg-9 col-sm-8">
+    <div class="col-lg-9 col-sm-8 mt-2">
       <nuxt-link :to="`/product/${product[idAttribute]}`">
-        <b>{{ product.title }}</b>
+        <b>{{ product[titleAttribute] }}</b>
       </nuxt-link>
-      <p>{{ product.description }}</p>
+      <p class="mt-2">{{ product.description }}</p>
     </div>
     <div class="col-12">
       <slot name="price-and-controls" :product="product">
@@ -86,6 +86,10 @@ export default {
     idAttribute: {
       type: String,
       default: 'id',
+    },
+    titleAttribute: {
+      type: String,
+      default: 'title',
     },
     hasFavourite: {
       type: Boolean,
