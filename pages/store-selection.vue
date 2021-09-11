@@ -102,7 +102,7 @@ export default {
         await this.deleteCart();
       }
 
-      this.$nuxt.context.redirect('/');
+      this.$router.push('/');
     },
   },
   async asyncData({ store }) {
