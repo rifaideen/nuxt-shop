@@ -5601,6 +5601,11 @@ num2fraction@^1.2.2:
   resolved "https://registry.npmjs.org/num2fraction/-/num2fraction-1.2.2.tgz"
   integrity sha1-b2gragJ6Tp3fpFZM0lidHU5mnt4=
 
+nuxt-rtanalytika@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/nuxt-rtanalytika/-/nuxt-rtanalytika-1.0.0.tgz#fbe65e72a099b062eef45f5b717a68683eaa3f01"
+  integrity sha512-o+QhiP9QNZjwwm4leiVo5R90pOEFn254KPPJ16EMzGspowCOea2MTtH6Ky0qqZXwxJEbXVCFLt8oX2FdcgR+Eg==
+
 nuxt@^2.15.7:
   version "2.15.8"
   resolved "https://registry.npmjs.org/nuxt/-/nuxt-2.15.8.tgz"

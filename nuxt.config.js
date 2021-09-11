@@ -47,9 +47,13 @@ export default {
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
     'cookie-universal-nuxt',
+    'nuxt-rtanalytika',
   ],
   axios: {
     baseURL: process.env.API_URL,
+  },
+  rtanalytika: {
+    uid: 'R3J-1002',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
