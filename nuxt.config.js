@@ -54,6 +54,10 @@ export default {
   },
   rtanalytika: {
     uid: 'R3J-1002',
+    // name of the routes to ignore tracking
+    ignores: [
+      'store-selection',
+    ],
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
